@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_navy">#1F2544</color>
+    <color name="light_navy">#474F7A</color>
+    <color name="trendy_pink">#81689D</color>
+    <color name="Shampoo">#FFD0EC</color>
+    <color name="light_green">#DCF2F1</color>
+    <color name="water_flow">#7FC7D9</color>
+    <color name="dino">#365486</color>
+    <color name="black_pearl">#0F1035</color>
 </resources>
