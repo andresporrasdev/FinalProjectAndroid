@@ -7,11 +7,62 @@
     android:layout_height="match_parent"
     tools:context=".RecipeSearchActivity">
 
-    <TextView
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="168dp"
-        tools:layout_editor_absoluteY="320dp" />
+        android:layout_marginBottom="8dp"
+        android:text="Search"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/recipeSearchEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintStart_toEndOf="@+id/recipeSearchEditText" />
+
+    <EditText
+        android:id="@+id/recipeSearchEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.174"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type A Recipe Name: "
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/recipeSearchEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.147"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.897" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Recipe Explore"
+        app:titleTextColor="@android:color/white"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewRecipeList"
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        android:padding="8dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipeSearchEditText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

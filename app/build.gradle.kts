@@ -26,6 +26,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    viewBinding {
+        enable = true
+    }
+
 }
 
 dependencies {
@@ -39,4 +44,9 @@ dependencies {
 
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.room:room-runtime:2.4.2")
+    annotationProcessor("androidx.room:room-compiler:2.4.2")
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("com.google.android.material:material:1.4.0")
+
 }
