@@ -20,10 +20,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btnRecipeSearch = findViewById(R.id.btnRecipeSearch);
+        Button btnDictionary = findViewById(R.id.btnDictionary);
+
         btnRecipeSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, RecipeSearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnDictionary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Dictionary.class);
                 startActivity(intent);
             }
         });
