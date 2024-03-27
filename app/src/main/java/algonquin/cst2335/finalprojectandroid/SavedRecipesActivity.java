@@ -83,6 +83,20 @@ public class SavedRecipesActivity extends AppCompatActivity {
         public MySavedRecipeHolder(ActivitySavedRecipeListBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAbsoluteAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        Recipe recipe = savedRecipes.get(position);
+                        Intent intent = new Intent(v.getContext(), SavedRecipesDetailActivity.class);
+                        intent.putExtra("RECIPE_ID", recipe.getRecipeId());
+                        itemView.getContext().startActivity(intent);
+                    }
+                }
+            });
+
         }
 
         void bind(Recipe recipe) {
@@ -97,12 +111,26 @@ public class SavedRecipesActivity extends AppCompatActivity {
             binding.textViewSavedRecipeTitle.setText(recipe.getTitle());
         }
 
-
-
     }
 
     private void setupRecyclerView() {
         binding.recyclerViewSavedRecipes.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerViewSavedRecipes.setAdapter(mySavedRecipeAdapter);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            List<Recipe> recipes = recipeDao.getAllRecipes();
+            runOnUiThread(() -> {
+                savedRecipes.clear();
+                savedRecipes.addAll(recipes);
+                mySavedRecipeAdapter.notifyDataSetChanged();
+            });
+        });
+    }
+
+
 }

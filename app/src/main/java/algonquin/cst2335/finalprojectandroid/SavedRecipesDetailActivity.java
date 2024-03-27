@@ -5,11 +5,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
-
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,22 +24,23 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import algonquin.cst2335.finalprojectandroid.databinding.ActivityRecipeDetailBinding;
+import algonquin.cst2335.finalprojectandroid.databinding.ActivitySavedRecipesDetailBinding;
 
-public class RecipeDetailActivity extends AppCompatActivity {
+public class SavedRecipesDetailActivity extends AppCompatActivity {
 
+    private ActivitySavedRecipesDetailBinding binding;
+    private RecipeDAO recipeDAO;
     private final String TAG = getClass().getSimpleName();
     private final String MY_KEY = "774f605053f045abad38658ffe65170b";
-    private ActivityRecipeDetailBinding binding;
     protected RequestQueue queue;
     private String imageUrl;
     private String summary;
     private String sourceUrl;
-    private RecipeDAO recipeDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityRecipeDetailBinding.inflate(getLayoutInflater());
+        binding = ActivitySavedRecipesDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         RecipeDatabase db = RecipeDatabase.getDatabase(getApplicationContext());
@@ -49,10 +53,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
             finish();
             return;
         }
-
         String title = getIntent().getStringExtra("RECIPE_TITLE");
-
-
         String url = "https://api.spoonacular.com/recipes/" + recipeId + "/information?apiKey=" + MY_KEY;
         queue = Volley.newRequestQueue(this);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -62,19 +63,20 @@ public class RecipeDetailActivity extends AppCompatActivity {
                         summary = response.getString("summary");
                         sourceUrl = response.getString("sourceUrl");
 
-                        Glide.with(this).load(imageUrl).into(binding.detailImageViewRecipe);
+                        Glide.with(this).load(imageUrl).into(binding.SavedDetailImageViewRecipe);
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                            binding.detailTextViewRecipeSummary.setText(Html.fromHtml(summary, Html.FROM_HTML_MODE_LEGACY));
+                            binding.SavedDetailTextViewRecipeSummary.setText(Html.fromHtml(summary, Html.FROM_HTML_MODE_LEGACY));
                         } else {
-                            binding.detailTextViewRecipeSummary.setText(Html.fromHtml(summary));
+                            binding.SavedDetailTextViewRecipeSummary.setText(Html.fromHtml(summary));
                         }
 
-                        binding.urlDescription.setText(sourceUrl);
-                        binding.urlDescription.setOnClickListener(clk -> {
+                        binding.SavedUrlDescription.setText(sourceUrl);
+                        binding.SavedUrlDescription.setOnClickListener(clk -> {
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(sourceUrl));
                             startActivity(browserIntent);
                         });
-                    } catch (Exception e) {
+
+                    } catch ( Exception e) {
                         Log.e(TAG, "Error parsing JSON response", e);
                         Toast.makeText(this, "Error fetching recipe details", Toast.LENGTH_SHORT).show();
                     }
@@ -82,13 +84,24 @@ public class RecipeDetailActivity extends AppCompatActivity {
                 error -> Log.e(TAG, "Error: " + error.getMessage()));
                 queue.add(request);
 
-        binding.buttonSaveRecipe.setOnClickListener(view -> {
-            Recipe recipe = new Recipe(recipeId, title, imageUrl, summary, sourceUrl);
-            Executor executor = Executors.newSingleThreadExecutor();
-            executor.execute(() -> {
-                recipeDAO.insert(recipe);
-                runOnUiThread(() -> Toast.makeText(RecipeDetailActivity.this, "Recipe Saved!", Toast.LENGTH_SHORT).show());
-            });
-        });
+                binding.buttonDeleteRecipe.setOnClickListener(click -> {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SavedRecipesDetailActivity.this);
+                    builder.setTitle("Delete Recipe")
+                            .setMessage("Are you sure you want to delete this recipe?")
+                            .setNegativeButton("No", (dialog, cl) -> {})
+                            .setPositiveButton("Yes", (dialog, cli) -> {
+                                Executor excecutor = Executors.newSingleThreadExecutor();
+                                excecutor.execute(() -> {
+                                    recipeDAO.deleteByRecipeID(recipeId);
+                                    runOnUiThread(() -> {
+                                        Toast.makeText(SavedRecipesDetailActivity.this, "Recipe deleted successfully", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    });
+                                });
+                            });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                });
     }
 }
