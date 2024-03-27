@@ -5,18 +5,19 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
-public interface RecipeDao {
+public interface RecipeDAO {
 
     @Insert
-    long insert(Recipe recipe);
+    public long insert(Recipe recipe);
 
     @Query("DELETE FROM recipes WHERE recipe_id = :recipeId")
-    void deleteByRecipeID(String recipeId);
+    public void deleteByRecipeID(String recipeId);
 
     @Query("SELECT * FROM recipes")
-    LiveData<List<Recipe>> getAllRecipes();
+    public List<Recipe> getAllRecipes();
 
 }

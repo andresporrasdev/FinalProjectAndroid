@@ -16,37 +16,34 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/detailTextViewRecipeTitle"
-        android:layout_width="0dp"
+        android:id="@+id/detailTextViewRecipeSummary"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Title"
-        android:textSize="24sp"
+        android:text="Summary"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detailImageViewRecipe" />
+        app:layout_constraintTop_toBottomOf="@+id/detailImageViewRecipe" />
 
     <TextView
-        android:id="@+id/detailTextViewRecipeSummary"
-        android:layout_width="379dp"
-        android:layout_height="210dp"
-        android:layout_marginTop="20dp"
-        android:text="Summary"
+        android:id="@+id/urlDescription"
+        android:layout_width="match_parent"
+        android:layout_height="23dp"
+        android:layout_marginTop="12dp"
+        android:text="url"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detailTextViewRecipeTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/detailTextViewRecipeSummary" />
 
     <Button
         android:id="@+id/buttonSaveRecipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
         android:text="Save"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detailTextViewRecipeSummary" />
-
+        app:layout_constraintTop_toBottomOf="@+id/urlDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

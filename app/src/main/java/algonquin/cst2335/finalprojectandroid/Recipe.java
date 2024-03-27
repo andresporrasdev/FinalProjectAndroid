@@ -11,7 +11,7 @@ public class Recipe {
     public int id;
 
     @ColumnInfo(name = "recipe_id")
-    public String recipeId;
+    public int recipeId;
 
     @ColumnInfo(name = "title")
     public String title;
@@ -19,18 +19,40 @@ public class Recipe {
     @ColumnInfo(name = "image")
     public String image;
 
+    @ColumnInfo(name = "summary")
+    public String summary;
+
+    @ColumnInfo(name = "sourceUrl")
+    public String sourceUrl;
+
     public Recipe() {
 
     }
 
-    public Recipe(String r, String t, String i) {
+    public Recipe(int r, String t, String i, String s, String u) {
+        recipeId = r;
+        title = t;
+        image = i;
+        summary = s;
+        sourceUrl = u;
+    }
+
+    public Recipe(int r, String t, String i) {
         recipeId = r;
         title = t;
         image = i;
     }
 
-    public String getRecipeId(){return recipeId;}
+    public Recipe(String i, String s, String u) {
+        image = i;
+        summary = s;
+        sourceUrl = u;
+    }
+
+    public int getRecipeId(){return recipeId;}
     public String getTitle(){return title;}
     public String getImage(){return image;}
+    public String getSummary(){return summary;}
+    public String getSourceUrl(){return sourceUrl;}
 
 }
