@@ -5,7 +5,9 @@ plugins {
 android {
     namespace = "algonquin.cst2335.finalprojectandroid"
     compileSdk = 34
-
+    buildFeatures {
+        viewBinding = true
+    }
     defaultConfig {
         applicationId = "algonquin.cst2335.finalprojectandroid"
         minSdk = 27
@@ -36,7 +38,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
+    implementation ("androidx.constraintlayout:constraintlayout:2.1.0")
+    implementation ("com.android.volley:volley:1.2.0")
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
 }

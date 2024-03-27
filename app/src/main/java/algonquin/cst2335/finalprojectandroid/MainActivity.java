@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnRecipeSearch = findViewById(R.id.btnRecipeSearch);
         Button btnDictionary = findViewById(R.id.btnDictionary);
+        Button btnDeezerSongSearch = findViewById(R.id.btnDeezerSongSearch);
+
+
 
         btnRecipeSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +32,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        btnDeezerSongSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, DeezerSongActivity.class);
+                startActivity(intent);
+            }
+        });
         btnDictionary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
