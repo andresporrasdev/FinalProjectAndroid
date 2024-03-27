@@ -1,9 +1,22 @@
 package algonquin.cst2335.finalprojectandroid;
+
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Song {
-    private String id;
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    private int id;
+    @ColumnInfo(name="title")
     private String title;
+    @ColumnInfo(name="duration")
     private String duration;
+    @ColumnInfo(name="albumName")
     private String albumName;
+    @ColumnInfo(name="albumCoverUrl")
     private String albumCoverUrl;
 
     public Song( String title, String duration, String albumName, String albumCoverUrl) {
@@ -12,11 +25,11 @@ public class Song {
         this.albumName = albumName;
         this.albumCoverUrl = albumCoverUrl;
     }
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
     // Getters
-    public String getId() {
+    public int getId() {
         return id;
     }
 
