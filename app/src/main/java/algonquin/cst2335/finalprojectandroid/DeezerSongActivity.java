@@ -1,6 +1,7 @@
 package algonquin.cst2335.finalprojectandroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,6 +35,9 @@ import algonquin.cst2335.finalprojectandroid.databinding.ActivityDeezerSongBindi
 public class DeezerSongActivity extends AppCompatActivity {
     private ActivityDeezerSongBinding binding;
     private List<Song> songs = new ArrayList<>();
+    private SharedPreferences sharedPreferences;
+    private static final String PREFS_NAME = "DeezerSongPrefs";
+    private static final String PREF_LAST_SEARCH = "pref_last_search";
 
 
     @Override
@@ -42,14 +46,33 @@ public class DeezerSongActivity extends AppCompatActivity {
         binding = ActivityDeezerSongBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
         setupRecyclerView();
-        binding.searchButton.setOnClickListener(v -> searchArtists(binding.artistText.getText().toString()));
-    }
+        restoreLastSearch();
+
+        binding.searchButton.setOnClickListener(v -> {
+            String artist = binding.artistText.getText().toString();
+            searchArtists(artist);
+            saveLastSearch(artist);
+        });
+
+ }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.song_menu, menu);
 
         return true;
+    }
+    private void restoreLastSearch() {
+        // Restore the last search from SharedPreferences
+        String lastSearch = sharedPreferences.getString(PREF_LAST_SEARCH, "");
+        binding.artistText.setText(lastSearch);
+    }
+
+    private void saveLastSearch(String search) {
+        // Save the last search into SharedPreferences
+        sharedPreferences.edit().putString(PREF_LAST_SEARCH, search).apply();
     }
 
     @Override

@@ -68,7 +68,6 @@ public class DeezerSongDetailActivity extends AppCompatActivity {
         binding = ActivityDeezerSongDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
-        // Initialize the database
         db = Room.databaseBuilder(getApplicationContext(),
                 SongDatabase.class, "song-database").build();
 
@@ -127,10 +126,9 @@ public class DeezerSongDetailActivity extends AppCompatActivity {
         builder.setTitle(R.string.help_title);
         builder.setMessage(R.string.help_message); // 假设你在strings.xml中定义了帮助信息
 
-        // 设置关闭按钮
+
         builder.setPositiveButton("Close", (dialog, which) -> dialog.dismiss());
 
-        // 创建并显示AlertDialog
         AlertDialog dialog = builder.create();
         dialog.show();
     }
