@@ -13,6 +13,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,14 +51,32 @@ public class DeezerSongActivity extends AppCompatActivity {
 
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.my_favorite) {
             Intent intent = new Intent(this, SongFav.class);
             startActivity(intent);
             return true;
+        }else if(item.getItemId() == R.id.info){
+            showHelpDialog();
+            return true;
+        }else if(item.getItemId() == R.id.goHome){
+            Intent intent = new Intent(this, DeezerSongActivity.class);
+            startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    private void showHelpDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.help_title);
+        builder.setMessage(R.string.help_message);
+
+        builder.setPositiveButton("Close", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
     private void setupRecyclerView() {
         binding.artistItem.setLayoutManager(new LinearLayoutManager(this));

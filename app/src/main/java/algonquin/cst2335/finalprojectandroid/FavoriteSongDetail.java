@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -86,7 +89,7 @@ public class FavoriteSongDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityFavoriteSongDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        setSupportActionBar(binding.toolbar);
         // Initialize database and executor
         db = Room.databaseBuilder(getApplicationContext(), SongDatabase.class, "song-database").build();
         executor = Executors.newSingleThreadExecutor();
@@ -103,7 +106,40 @@ public class FavoriteSongDetail extends AppCompatActivity {
 
         binding.delete.setOnClickListener(v -> deleteSong(songId));
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.song_menu, menu);
 
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.my_favorite) {
+            Intent intent = new Intent(this, SongFav.class);
+            startActivity(intent);
+            return true;
+        }else if(item.getItemId() == R.id.info){
+            showHelpDialog();
+            return true;
+        }else if(item.getItemId() == R.id.goHome){
+            Intent intent = new Intent(this, DeezerSongActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void showHelpDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.help_title);
+        builder.setMessage(R.string.help_message); // 假设你在strings.xml中定义了帮助信息
+
+        // 设置关闭按钮
+        builder.setPositiveButton("Close", (dialog, which) -> dialog.dismiss());
+
+        // 创建并显示AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
     private void loadSongDetails(int songId) {
         executor.execute(() -> {
             Song song = db.songDao().findById(songId);

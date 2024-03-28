@@ -3,14 +3,17 @@ package algonquin.cst2335.finalprojectandroid;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -95,7 +98,8 @@ public class SongFav extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_fav);
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         favSongList = findViewById(R.id.favSongList);
         favSongList.setLayoutManager(new LinearLayoutManager(this));
 
@@ -138,6 +142,41 @@ public class SongFav extends AppCompatActivity {
         // Fetch songs from the database
         fetchSongsFromDatabase(adapter);
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.song_menu, menu);
+
+        return true;
+    }
+    private void showHelpDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.help_title);
+        builder.setMessage(R.string.help_message); // 假设你在strings.xml中定义了帮助信息
+
+        // 设置关闭按钮
+        builder.setPositiveButton("Close", (dialog, which) -> dialog.dismiss());
+
+        // 创建并显示AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.my_favorite) {
+            Intent intent = new Intent(this, SongFav.class);
+            startActivity(intent);
+            return true;
+        }else if(item.getItemId() == R.id.goHome){
+            Intent intent = new Intent(this, DeezerSongActivity.class);
+            startActivity(intent);
+            return true;
+        }else if(item.getItemId() == R.id.info){
+            showHelpDialog();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     // Fetches songs in a background thread and updates the adapter
     private void fetchSongsFromDatabase(final RecyclerView.Adapter<SongViewHolder> adapter) {
@@ -146,6 +185,7 @@ public class SongFav extends AppCompatActivity {
             runOnUiThread(adapter::notifyDataSetChanged);
         });
     }
+
 
     // ViewHolder for RecyclerView items
     static class SongViewHolder extends RecyclerView.ViewHolder {

@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="FAVORITE LIST"
+        android:text="@string/favorite_list_text"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/favSongList"
         app:layout_constraintEnd_toEndOf="parent"

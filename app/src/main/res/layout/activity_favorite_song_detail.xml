@@ -32,7 +32,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Duration in sec"
+        android:text="@string/duration_text"
         app:layout_constraintBottom_toBottomOf="@+id/favDurationText"
         app:layout_constraintTop_toTopOf="@+id/favDurationText"
         app:layout_constraintVertical_bias="1.0"
@@ -66,7 +66,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Album Name"
+        android:text="@string/album_name_text"
         app:layout_constraintBottom_toBottomOf="@+id/favAlbumText"
         app:layout_constraintTop_toTopOf="@+id/favAlbumText"
         app:layout_constraintVertical_bias="1.0"
@@ -81,7 +81,7 @@
         app:layout_constraintHorizontal_bias="0.94"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/favTitleText"
-        tools:text="Album Name" />
+        tools:text="@string/album_name_text" />
 
     <Button
         android:id="@+id/delete"
@@ -89,7 +89,7 @@
         android:layout_height="51dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="80dp"
-        android:text="Delete"
+        android:text="@string/delete_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -101,7 +101,7 @@
         android:id="@+id/songName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="@string/title_text"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/favTitleText"
         app:layout_constraintTop_toTopOf="@+id/favTitleText"
