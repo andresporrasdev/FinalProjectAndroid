@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -19,9 +20,20 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("All-in-one Hub");
+        setSupportActionBar(toolbar);
+
         Button btnRecipeSearch = findViewById(R.id.btnRecipeSearch);
         Button btnDictionary = findViewById(R.id.btnDictionary);
-
+        Button btnSunriseSunsetlookup = findViewById(R.id.btnSunriseSunsetlookup);
+        btnSunriseSunsetlookup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SSLookupActivity.class);
+                startActivity(intent);
+            }
+        });
         btnRecipeSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
