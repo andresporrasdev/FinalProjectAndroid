@@ -2,6 +2,8 @@ package algonquin.cst2335.finalprojectandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("All-in-one Hub");
+        toolbar.setTitle("All-In-One Hub");
         setSupportActionBar(toolbar);
 
         Button btnRecipeSearch = findViewById(R.id.btnRecipeSearch);
@@ -56,4 +58,37 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_sun) {
+            Intent intent = new Intent(MainActivity.this, SSLookupActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_recipe) {
+            Intent intent = new Intent(MainActivity.this, RecipeSearchActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_dictionary) {
+            Intent intent = new Intent(MainActivity.this, Dictionary.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_album) {
+            // Perform action for the album or navigate
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
 }

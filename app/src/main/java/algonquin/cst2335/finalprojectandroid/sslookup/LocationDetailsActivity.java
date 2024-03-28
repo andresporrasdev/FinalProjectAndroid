@@ -1,4 +1,15 @@
+/*
+ * Purpose: This file provides the functionality for displaying the details of a location including sunrise and sunset times,
+ *          and allows the user to delete the location from the database.
+ * Author:
+ * Lab Section: 022
+ * Creation Date: Mar 26, 2024
+ */
 package algonquin.cst2335.finalprojectandroid.sslookup;
+
+import static algonquin.cst2335.finalprojectandroid.R.string.error_parsing_data;
+import static algonquin.cst2335.finalprojectandroid.R.string.location_deleted;
+import static algonquin.cst2335.finalprojectandroid.R.string.location_not_available;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,9 +19,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.room.Room;
 
 import com.android.volley.Request;
@@ -20,19 +28,48 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import algonquin.cst2335.finalprojectandroid.R;
 
+/**
+ * Activity to display and manage the details of a location including sunrise and sunset times.
+ * Users can delete a location, which will remove it from the database.
+ */
 public class LocationDetailsActivity extends AppCompatActivity {
-    private TextView sunriseTextView, sunsetTextView, locationTextView;
-    private double latitude, longitude;
+    /**
+     * TextView for displaying the sunrise time.
+     */
+    private TextView sunriseTextView;
 
+    /**
+     * TextView for displaying the sunset time.
+     */
+    private TextView sunsetTextView;
+
+    /**
+     * TextView for displaying the location name.
+     */
+    private TextView locationTextView;
+
+    /**
+     * Latitude coordinate of the location.
+     */
+    private double latitude;
+
+    /**
+     * Longitude coordinate of the location.
+     */
+    private double longitude;
+
+    /**
+     * Button to delete the current location.
+     */
     private Button deleteButton;
+
+    /**
+     * The current location entity being displayed.
+     */
     private LocationEntity currentLocation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +77,7 @@ public class LocationDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location_details);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Sunrise & Sunset Lookup App");
+        toolbar.setTitle(R.string.toolbar_app_name);
         setSupportActionBar(toolbar);
 
         sunriseTextView = findViewById(R.id.sunriseTextView);
@@ -52,7 +89,7 @@ public class LocationDetailsActivity extends AppCompatActivity {
         longitude = getIntent().getDoubleExtra("longitude", 0);
         String formattedLocation = getIntent().getStringExtra("formattedLocation");
 
-        locationTextView.setText("Location: " + formattedLocation);
+        locationTextView.setText(getString(R.string.location_) + formattedLocation);
 
         lookupSunriseSunset();
 
@@ -71,7 +108,9 @@ public class LocationDetailsActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Fetches and displays sunrise and sunset times for the current location.
+     */
     private void lookupSunriseSunset() {
         String latitude = String.valueOf(this.latitude);
         String longitude = String.valueOf(this.longitude);
@@ -84,21 +123,23 @@ public class LocationDetailsActivity extends AppCompatActivity {
                         String sunrise = results.getString("sunrise");
                         String sunset = results.getString("sunset");
 
-                        sunriseTextView.setText("Sunrise: " + sunrise);
-                        sunsetTextView.setText("Sunset: " + sunset);
+                        sunriseTextView.setText(getString(R.string.sunrise_) + sunrise);
+                        sunsetTextView.setText(getString(R.string.sunset_) + sunset);
                     } catch (Exception e) {
-                        Toast.makeText(LocationDetailsActivity.this, "Error parsing data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LocationDetailsActivity.this, error_parsing_data, Toast.LENGTH_SHORT).show();
                     }
-                }, error -> Toast.makeText(LocationDetailsActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show());
+                }, error -> Toast.makeText(LocationDetailsActivity.this, R.string.error_fetching_data, Toast.LENGTH_SHORT).show());
 
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(jsonObjectRequest);
     }
 
-
+    /**
+     * Deletes the current location from the database and finishes the activity.
+     */
     private void deleteLocation() {
         if (currentLocation == null) {
-            Toast.makeText(this, "Location not available", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, location_not_available, Toast.LENGTH_SHORT).show();
             return;
         }
         new Thread(() -> {
@@ -110,7 +151,7 @@ public class LocationDetailsActivity extends AppCompatActivity {
 
             // After deletion, finish the activity and go back
             runOnUiThread(() -> {
-                Toast.makeText(LocationDetailsActivity.this, "Location deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LocationDetailsActivity.this, location_deleted, Toast.LENGTH_SHORT).show();
                 finish(); // Close the activity
             });
         }).start();

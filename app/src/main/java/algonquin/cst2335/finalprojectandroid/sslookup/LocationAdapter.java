@@ -1,3 +1,9 @@
+/*
+ * Purpose: Adapter class for managing the display of location entities in a RecyclerView within the Sunrise & Sunset Lookup App.
+ * Author:
+ * Lab Section: 022
+ * Creation Date: Mar 26, 2024
+ */
 package algonquin.cst2335.finalprojectandroid.sslookup;
 
 import android.content.Context;
@@ -14,11 +20,27 @@ import java.util.List;
 
 import algonquin.cst2335.finalprojectandroid.R;
 
+/**
+ * Adapter class for managing the display of location entities in a RecyclerView. It handles the
+ * creation and binding of view holders to display location data.
+ */
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
-
+    /**
+     * List of LocationEntity objects that the adapter uses to bind data to the views.
+     */
     private List<LocationEntity> locations;
+
+    /**
+     * LayoutInflater used to inflate the layout for each item in the RecyclerView.
+     */
     private LayoutInflater inflater;
 
+    /**
+     * Constructs a LocationAdapter with the specified context and list of locations.
+     *
+     * @param context   The context where the adapter is used.
+     * @param locations The list of location entities to be displayed.
+     */
     public LocationAdapter(Context context, List<LocationEntity> locations) {
         this.inflater = LayoutInflater.from(context);
         this.locations = locations;
@@ -55,11 +77,19 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         return locations.size();
     }
 
+    /**
+     * Updates the list of locations and notifies the adapter to refresh the display.
+     *
+     * @param locations The new list of locations to display.
+     */
     public void setLocations(List<LocationEntity> locations) {
         this.locations = locations;
         notifyDataSetChanged();
     }
 
+    /**
+     * ViewHolder class to represent each item in the RecyclerView.
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView latitudeTextView;
         TextView longitudeTextView;
