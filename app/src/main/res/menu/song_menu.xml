@@ -4,6 +4,12 @@
 
     <item
         android:id="@+id/my_favorite"
-        android:icon="@android:drawable/btn_star_big_on"
-        android:title="My Favorite" />
+        android:icon="@drawable/heart"
+        android:title="My Favorite"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/goHome"
+        android:icon="@drawable/home"
+        android:title="Go Home Page"
+        app:showAsAction="always" />
 </menu>

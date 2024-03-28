@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DeezerSongDetailActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/favAlbumCover"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Duration in sec"
+        app:layout_constraintBottom_toBottomOf="@+id/favDurationText"
+        app:layout_constraintTop_toTopOf="@+id/favDurationText"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/favTitleText"
+        android:layout_width="219dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.605"
+        app:layout_constraintStart_toEndOf="@+id/songName"
+        app:layout_constraintTop_toBottomOf="@id/favAlbumCover"
+        tools:text="Song Title" />
+
+    <TextView
+        android:id="@+id/favDurationText"
+        android:layout_width="270dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/favAlbumText"
+        app:layout_constraintTop_toBottomOf="@+id/favAlbumText"
+        tools:text="Duration" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Album Name"
+        app:layout_constraintBottom_toBottomOf="@+id/favAlbumText"
+        app:layout_constraintTop_toTopOf="@+id/favAlbumText"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="17dp" />
+
+    <TextView
+        android:id="@+id/favAlbumText"
+        android:layout_width="261dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/favTitleText"
+        tools:text="Album Name" />
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="106dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="80dp"
+        android:text="Delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favDurationText"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/songName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/favTitleText"
+        app:layout_constraintTop_toTopOf="@+id/favTitleText"
+        tools:layout_editor_absoluteX="17dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

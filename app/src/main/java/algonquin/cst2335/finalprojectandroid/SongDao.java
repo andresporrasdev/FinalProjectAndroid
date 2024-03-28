@@ -10,6 +10,8 @@ import java.util.List;
     public interface SongDao {
         @Query("SELECT * FROM song")
         List<Song> getAll();
+        @Query("SELECT * FROM song WHERE id = :id")
+        Song findById(int id);
 
         @Insert
         void insert(Song song);
