@@ -1,4 +1,13 @@
+/*
+ * Purpose: This file is the main activity for the Sunrise & Sunset Lookup App.
+ * Author:
+ * Lab Section: 022
+ * Creation Date: Mar 26, 2024
+ */
 package algonquin.cst2335.finalprojectandroid;
+
+import static algonquin.cst2335.finalprojectandroid.R.string.error_fetching_data;
+import static algonquin.cst2335.finalprojectandroid.R.string.location_saved_successfully;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
@@ -42,17 +51,79 @@ import algonquin.cst2335.finalprojectandroid.sslookup.LocationAdapter;
 import algonquin.cst2335.finalprojectandroid.sslookup.LocationDao;
 import algonquin.cst2335.finalprojectandroid.sslookup.LocationEntity;
 
-public class SSLookupActivity extends AppCompatActivity {
-    private EditText latitudeEditText, longitudeEditText;
-    private Button lookupButton, saveLocationButton, viewFavoritesButton;
-    private TextView sunriseTextView, sunsetTextView, timezoneTextView;
 
+/**
+ * The main activity for the Sunrise & Sunset Lookup App. It allows users to input latitude and longitude to
+ * find sunrise and sunset times, save locations to favorites, and view saved locations. It also includes a help
+ * menu with instructions on how to use the app.
+ * @author Yiyi Cheng
+ */
+public class SSLookupActivity extends AppCompatActivity {
+    /**
+     * EditText for inputting latitude. Users should enter the latitude value for the location they want to lookup.
+     */
+    private EditText latitudeEditText;
+
+    /**
+     * EditText for inputting longitude. Users should enter the longitude value for the location they want to lookup.
+     */
+    private EditText longitudeEditText;
+
+    /**
+     * Button to trigger the lookup of sunrise and sunset times based on the entered latitude and longitude.
+     */
+    private Button lookupButton;
+
+    /**
+     * Button to save the currently displayed location and its sunrise and sunset times into the favorites list.
+     */
+    private Button saveLocationButton;
+
+    /**
+     * Button to view the list of saved favorite locations along with their sunrise and sunset times.
+     */
+    private Button viewFavoritesButton;
+
+    /**
+     * TextView to display the sunrise time for the given location.
+     */
+    private TextView sunriseTextView;
+
+    /**
+     * TextView to display the sunset time for the given location.
+     */
+    private TextView sunsetTextView;
+
+    /**
+     * TextView to display the formatted location name based on the reverse geocoded latitude and longitude.
+     */
+    private TextView timezoneTextView;
+
+    /**
+     * RecyclerView to display the list of saved favorite locations.
+     */
     private RecyclerView favoritesRecyclerView;
+
+    /**
+     * SharedPreferences to store and retrieve user preferences such as the last entered latitude and longitude.
+     */
     private SharedPreferences sharedPreferences;
+
+    /**
+     * String to hold the formatted location name for the current latitude and longitude.
+     */
     private String formattedLocation;
 
-    AppDatabase db;
+    /**
+     * AppDatabase instance for Room database access, used to persist favorite locations.
+     */
+    private AppDatabase db;
+
+    /**
+     * LocationDao instance for performing CRUD operations on the location entities in the Room database.
+     */
     private LocationDao locationDao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +132,7 @@ public class SSLookupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sslookup);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Sunrise & Sunset Lookup App");
+        toolbar.setTitle(R.string.toolbar_app_name);
         setSupportActionBar(toolbar);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -94,7 +165,7 @@ public class SSLookupActivity extends AppCompatActivity {
         saveLocationButton.setOnClickListener(v -> saveLocation(formattedLocation));
         viewFavoritesButton.setOnClickListener(v -> viewFavorites());
 
-        // Initialize Room database and RecyclerView here
+        // Initialize Room database and RecyclerView
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "database-name").build();
 
@@ -102,6 +173,9 @@ public class SSLookupActivity extends AppCompatActivity {
         locationDao = db.locationDao();
     }
 
+    /**
+     * Looks up the sunrise and sunset times for the given latitude and longitude.
+     */
     private void lookupSunriseSunset() {
         String latitude = latitudeEditText.getText().toString();
         String longitude = longitudeEditText.getText().toString();
@@ -113,27 +187,30 @@ public class SSLookupActivity extends AppCompatActivity {
 
         String sunriseSunsetUrl = "https://api.sunrisesunset.io/json?lat=" + latitude + "&lng=" + longitude + "&date=today&timezone=UTC";
 
-        // Request a string response from the provided URL.
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, sunriseSunsetUrl, null, response -> {
                     try {
+
                         JSONObject results = response.getJSONObject("results");
                         String sunrise = results.getString("sunrise");
                         String sunset = results.getString("sunset");
 
-                        sunriseTextView.setText("Sunrise: " + sunrise);
-                        sunsetTextView.setText("Sunset: " + sunset);
+                        sunriseTextView.setText(getString(R.string.sunrise_) + sunrise);
+                        sunsetTextView.setText(getString(R.string.sunset_) + sunset);
                         lookupLocation(latitude, longitude);
                     } catch (Exception e) {
-                        Toast.makeText(SSLookupActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SSLookupActivity.this, error_fetching_data, Toast.LENGTH_SHORT).show();
                     }
-                }, error -> Toast.makeText(SSLookupActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show());
+                }, error -> Toast.makeText(SSLookupActivity.this, error_fetching_data, Toast.LENGTH_SHORT).show());
 
         // Add the request to the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(jsonObjectRequest);
     }
 
+    /**
+     * Looks up the location based on latitude and longitude using a reverse geocoding service.
+     */
     private void lookupLocation(String latitude, String longitude) {
         String locationUrl = "https://nominatim.openstreetmap.org/reverse?format=json&lat="
                 + latitude + "&lon=" + longitude + "&zoom=5";
@@ -142,10 +219,10 @@ public class SSLookupActivity extends AppCompatActivity {
                 (Request.Method.GET, locationUrl, null, response -> {
                     String displayName = response.optString("display_name", "Unnamed Location");
                     formattedLocation = displayName;
-                    timezoneTextView.setText("Location: " + formattedLocation);
+                    timezoneTextView.setText(getString(R.string.location_) + formattedLocation);
                 }, error -> {
                     formattedLocation = "Unnamed Location";
-                    timezoneTextView.setText("Location: " + formattedLocation);
+                    timezoneTextView.setText(getString(R.string.location_) + formattedLocation);
                 });
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -153,7 +230,9 @@ public class SSLookupActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Saves the location with its latitude, longitude, and formatted address.
+     */
     private void saveLocation(String formattedLocation) {
         String latitudeStr = latitudeEditText.getText().toString();
         String longitudeStr = longitudeEditText.getText().toString();
@@ -170,20 +249,19 @@ public class SSLookupActivity extends AppCompatActivity {
             new Thread(() -> {
                 locationDao.insertLocation(location);
                 runOnUiThread(() -> {
-//                    Toast.makeText(SSLookupActivity.this, "Location saved", Toast.LENGTH_SHORT).show();
-                    Snackbar.make(findViewById(R.id.main), "Location saved successfully", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(findViewById(R.id.main), location_saved_successfully, Snackbar.LENGTH_LONG).show();
                     loadFavorites();
                 });
             }).start();
 
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Invalid latitude or longitude", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.invalid_latitude_or_longitude, Toast.LENGTH_SHORT).show();
         }
     }
 
-
-
-
+    /**
+     * Displays the list of saved locations from the database.
+     */
     private void viewFavorites() {
         new Thread(() -> {
             List<LocationEntity> locations = locationDao.getAllLocations();
@@ -199,6 +277,10 @@ public class SSLookupActivity extends AppCompatActivity {
             });
         }).start();
     }
+
+    /**
+     * Loads the saved locations into the RecyclerView.
+     */
     private void loadFavorites() {
         new Thread(() -> {
             List<LocationEntity> locations = locationDao.getAllLocations();
@@ -215,7 +297,7 @@ public class SSLookupActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         // refresh the list every time the activity resumes
-        loadFavorites();
+//        loadFavorites();
     }
 
     @Override
@@ -234,20 +316,23 @@ public class SSLookupActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Shows the help dialog with instructions for using the app.
+     */
     private void showHelpDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Help");
-        builder.setMessage("Welcome to the Sunrise & Sunset Lookup App! This application allows you to find the sunrise and sunset times for any location specified by its latitude and longitude.\n\n" +
-                "How to Use:\n" +
-                "- Enter Latitude and Longitude: In the provided text fields, enter the latitude and longitude for which you wish to find sunrise and sunset times. Latitude and longitude should be in decimal format.\n" +
-                "- Lookup Sunrise and Sunset Times: Press the 'Lookup' button to retrieve the sunrise and sunset times for the entered location.\n" +
-                "- Save a Location: If you wish to save the location for future reference, press the 'Save Location' button after looking up the times. This will store the location in your favorites list.\n" +
-                "- View Saved Locations: Click on 'View Favorites' to see a list of all saved locations along with their sunrise and sunset times. You can click on any location in the list to view more details or delete it from the favorites.\n\n" +
-                "Tips:\n" +
-                "- Make sure the latitude and longitude are correct to get accurate sunrise and sunset times.\n" +
-                "- Use negative values for latitudes south of the equator and longitudes west of the Prime Meridian.\n\n" +
-                "Should you need further assistance or encounter any issues, please feel free to contact our support team.");
-        builder.setPositiveButton("OK", null);
+        builder.setTitle(R.string.instruction_title);
+        builder.setMessage(getString(R.string.instruction_body_welcome) +
+                getString(R.string.instruction_body_how_to_use) +
+                getString(R.string.instuction_body_how_to_use_1) +
+                getString(R.string.instuction_body_how_to_use_2) +
+                getString(R.string.instuction_body_how_to_use_3) +
+                getString(R.string.instuction_body_how_to_use_4) +
+                getString(R.string.instuction_body_tips) +
+                getString(R.string.instuction_body_tips_1) +
+                getString(R.string.instuction_body_tips_2) +
+                getString(R.string.instuction_body_ask_for_assistance));
+        builder.setPositiveButton(R.string.ok, null);
         AlertDialog dialog = builder.create();
         dialog.show();
     }
