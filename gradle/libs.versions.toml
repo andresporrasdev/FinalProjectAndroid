@@ -7,15 +7,17 @@ appcompat = "1.6.1"
 material = "1.11.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
+espressoContrib = "3.6.0-alpha03"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+ext-junit = { group = "androidx.test.ext", name = "junit", version = "1.2.0-alpha03" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version = "3.6.0-alpha03" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+espresso-contrib = { group = "androidx.test.espresso", name = "espresso-contrib", version.ref = "espressoContrib" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

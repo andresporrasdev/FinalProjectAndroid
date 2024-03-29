@@ -28,7 +28,6 @@ public class Song {
     public void setId(int id) {
         this.id = id;
     }
-    // Getters
     public int getId() {
         return id;
     }

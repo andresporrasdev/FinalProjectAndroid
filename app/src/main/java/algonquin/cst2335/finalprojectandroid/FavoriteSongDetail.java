@@ -2,27 +2,15 @@ package algonquin.cst2335.finalprojectandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.room.Room;
-
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import algonquin.cst2335.finalprojectandroid.databinding.ActivityFavoriteSongDetailBinding;
 
 public class FavoriteSongDetail extends AppCompatActivity {
@@ -76,7 +64,7 @@ public class FavoriteSongDetail extends AppCompatActivity {
     private void showHelpDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.help_title);
-        builder.setMessage(R.string.help_message); // 假设你在strings.xml中定义了帮助信息
+        builder.setMessage(R.string.help_message);
 
 
         builder.setPositiveButton("Close", (dialog, which) -> dialog.dismiss());

@@ -46,4 +46,9 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation ("androidx.room:room-runtime:2.6.1")
     annotationProcessor ("androidx.room:room-compiler:2.6.1")
+    androidTestImplementation(libs.espresso.contrib)
+    implementation("androidx.test.espresso:espresso-core:3.6.0-alpha03")
+    implementation("androidx.test:runner:1.5.2")
+    implementation("androidx.test:rules:1.6.0-alpha03")
+    implementation("androidx.test.ext:junit:1.2.0-alpha03")
 }
