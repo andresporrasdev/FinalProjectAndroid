@@ -24,6 +24,21 @@ import java.util.concurrent.Executors;
 
 import algonquin.cst2335.finalprojectandroid.databinding.ActivityRecipeDetailBinding;
 
+/**
+ * File name: RecipeDetailActivity.java
+ * Author: Tsaichun Chang
+ * Course: CST2335-022
+ * Assignment: Final Project
+ * Date: 2024-03-29
+ *
+ * @author Tsaichun Chang
+ * @version 1
+ *
+ * It retrieves recipe details from an external API using the recipe ID passed through an intent.
+ * Users can view the recipe's image, summary, and source URL, and have the option to save the recipe
+ * to a local database for future reference.
+ *
+ */
 public class RecipeDetailActivity extends AppCompatActivity {
 
     private final String TAG = getClass().getSimpleName();
@@ -35,6 +50,16 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private String sourceUrl;
     private RecipeDAO recipeDAO;
 
+    /**
+     * Initializes the activity, sets up view binding, retrieves the recipe ID passed through the intent,
+     * and makes a network request to fetch the recipe's details. It also initializes the database access object
+     * and sets up the UI to display the recipe's information. Users can save the recipe to the local database.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously
+     *                           being shut down then this Bundle contains the data it
+     *                           most recently supplied in onSaveInstanceState(Bundle).
+     *                           Note: Otherwise it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -24,6 +24,18 @@ import java.util.concurrent.Executors;
 
 import algonquin.cst2335.finalprojectandroid.databinding.ActivitySavedRecipesDetailBinding;
 
+/**
+ * File name: SavedRecipesDetailActivity.java
+ * Author: Tsaichun Chang
+ * Course: CST2335-022
+ * Assignment: Final Project
+ * Date: 2024-03-29
+ *
+ * @author Tsaichun Chang
+ * @version 1
+ *
+ * This activity displays the details of a saved recipe.
+ */
 public class SavedRecipesDetailActivity extends AppCompatActivity {
 
     private ActivitySavedRecipesDetailBinding binding;
@@ -35,6 +47,13 @@ public class SavedRecipesDetailActivity extends AppCompatActivity {
     private String summary;
     private String sourceUrl;
 
+    /**
+     * Called when the activity is starting. Responsible for initializing the activity.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being
+     *                            shut down then this Bundle contains the data it most recently
+     *                            supplied in onSaveInstanceState(Bundle). Note: Otherwise, it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

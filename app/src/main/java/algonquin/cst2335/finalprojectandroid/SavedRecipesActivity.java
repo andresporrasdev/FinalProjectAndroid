@@ -26,6 +26,21 @@ import java.util.concurrent.Executors;
 import algonquin.cst2335.finalprojectandroid.databinding.ActivitySavedRecipeListBinding;
 import algonquin.cst2335.finalprojectandroid.databinding.ActivitySavedRecipesBinding;
 
+/**
+ * File name: SavedRecipesActivity.java
+ * Author: Tsaichun Chang
+ * Course: CST2335-022
+ * Assignment: Final Project
+ * Date: 2024-03-29
+ *
+ * @author Tsaichun Chang
+ * @version 1
+ *
+ *  Activity class for displaying and managing a list of saved recipes.
+ *  This class is responsible for initializing and setting up the RecyclerView
+ *  to display saved recipes, handling click events to view and delete recipes,
+ *  and managing the data flow between the UI and the database.
+ */
 public class SavedRecipesActivity extends AppCompatActivity {
 
     private ActivitySavedRecipesBinding binding;
@@ -33,6 +48,15 @@ public class SavedRecipesActivity extends AppCompatActivity {
     private List<Recipe> savedRecipes = new ArrayList<>();
     private RecyclerView.Adapter mySavedRecipeAdapter;
 
+    /**
+     * Initializes the activity, sets up the RecyclerView and its adapter,
+     * and loads the saved recipes from the database.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *                           previously being shut down then this Bundle
+     *                           contains the data it most recently supplied in
+     *                           onSaveInstanceState(Bundle). Note: Otherwise it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +89,11 @@ public class SavedRecipesActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Inner class for providing a reference to the views for each data item.
+     * Complex data items may need more than one view per item, and
+     * the holder provides access to all the views for a data item in a recycler view.
+     */
     class MySavedRecipeHolder extends RecyclerView.ViewHolder {
         private ActivitySavedRecipeListBinding binding;
         public MySavedRecipeHolder(ActivitySavedRecipeListBinding binding) {
@@ -114,11 +143,20 @@ public class SavedRecipesActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Sets up the RecyclerView including setting its layout manager.
+     */
     private void setupRecyclerView() {
         binding.recyclerViewSavedRecipes.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerViewSavedRecipes.setAdapter(mySavedRecipeAdapter);
     }
 
+    /**
+     * Shows a confirmation dialog to delete a recipe. If confirmed, it
+     * deletes the recipe from the database and updates the UI accordingly.
+     *
+     * @param RecipeId The ID of the recipe to be deleted.
+     */
     private void showDeleteConfirmationDialog(int RecipeId) {
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.delete_recipe_title))
@@ -137,12 +175,21 @@ public class SavedRecipesActivity extends AppCompatActivity {
                 .show();
     }
 
+    /**
+     * Reloads the saved recipes from the database into the RecyclerView
+     * whenever the activity resumes, ensuring the data displayed is up-to-date.
+     */
     @Override
     protected void onResume() {
         super.onResume();
         loadSavedRecipes();
     }
 
+    /**
+     * Loads the saved recipes from the database asynchronously, updates the
+     * UI thread with the fetched data, and refreshes the RecyclerView to
+     * display the latest data.
+     */
     private void loadSavedRecipes() {
         Executor executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
