@@ -136,7 +136,7 @@ public class DeezerSongActivity extends AppCompatActivity {
         builder.setTitle(R.string.help_title);
         builder.setMessage(R.string.help_message);
 
-        builder.setPositiveButton("Close", (dialog, which) -> dialog.dismiss());
+        builder.setPositiveButton(R.string.close_text, (dialog, which) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -195,12 +195,13 @@ public class DeezerSongActivity extends AppCompatActivity {
                     String tracklistUrl = firstArtist.getString("tracklist");
                     fetchTracklist(tracklistUrl);
                 } else {
-                    Toast.makeText(DeezerSongActivity.this, "No artists found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DeezerSongActivity.this,R.string.error_artist, Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
-                Toast.makeText(DeezerSongActivity.this, "Error parsing data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DeezerSongActivity.this, R.string.error_parsing_data, Toast.LENGTH_SHORT).show();
+
             }
-        }, error -> Toast.makeText(DeezerSongActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show());
+        }, error -> Toast.makeText(DeezerSongActivity.this, R.string.error_fetch_data_text, Toast.LENGTH_SHORT).show());
 
         Volley.newRequestQueue(this).add(stringRequest);
     }
@@ -229,9 +230,9 @@ public class DeezerSongActivity extends AppCompatActivity {
                 }
                 binding.artistItem.getAdapter().notifyDataSetChanged();
             } catch (Exception e) {
-                Toast.makeText(DeezerSongActivity.this, "Error parsing tracklist", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DeezerSongActivity.this, R.string.error_parsing_tracklist, Toast.LENGTH_SHORT).show();
             }
-        }, error -> Toast.makeText(DeezerSongActivity.this, "Error fetching tracklist", Toast.LENGTH_SHORT).show());
+        }, error -> Toast.makeText(DeezerSongActivity.this, R.string.error_fetch_tracklist, Toast.LENGTH_SHORT).show());
 
         Volley.newRequestQueue(this).add(stringRequest);
     }

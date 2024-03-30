@@ -109,7 +109,7 @@ public class SongFav extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.help_title);
         builder.setMessage(R.string.help_message);
-        builder.setPositiveButton("Close", (dialog, which) -> dialog.dismiss());
+        builder.setPositiveButton(R.string.close_text, (dialog, which) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();

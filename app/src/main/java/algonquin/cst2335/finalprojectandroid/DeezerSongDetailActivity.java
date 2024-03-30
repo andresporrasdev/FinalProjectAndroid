@@ -61,7 +61,7 @@ public class DeezerSongDetailActivity extends AppCompatActivity {
             executor.execute(() -> {
                 db.songDao().insert(song);
                  runOnUiThread(() -> {
-                    Toast.makeText(DeezerSongDetailActivity.this, "Added to favorites", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DeezerSongDetailActivity.this, R.string.add_favorite_text, Toast.LENGTH_SHORT).show();
                 });
             });
         });
@@ -101,7 +101,7 @@ public class DeezerSongDetailActivity extends AppCompatActivity {
         builder.setMessage(R.string.help_message);
 
 
-        builder.setPositiveButton("Close", (dialog, which) -> dialog.dismiss());
+        builder.setPositiveButton(R.string.close_text, (dialog, which) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();

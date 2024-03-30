@@ -52,7 +52,7 @@ public class FavoriteSongDetail extends AppCompatActivity {
         Intent intent = getIntent();
         songId = intent.getIntExtra("SONG_ID", -1);
         if (songId == -1) {
-            Snackbar.make(binding.getRoot(), "No song ID provided", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(binding.getRoot(), R.string.no_song_id_text, Snackbar.LENGTH_SHORT).show();
             return;  }
 
         loadSongDetails(songId);
@@ -91,7 +91,7 @@ public class FavoriteSongDetail extends AppCompatActivity {
         builder.setMessage(R.string.help_message);
 
 
-        builder.setPositiveButton("Close", (dialog, which) -> dialog.dismiss());
+        builder.setPositiveButton(R.string.close_text, (dialog, which) -> dialog.dismiss());
 
 
         AlertDialog dialog = builder.create();
@@ -118,7 +118,7 @@ public class FavoriteSongDetail extends AppCompatActivity {
                     binding.favDurationText.setText(song.getDuration());
                     Glide.with(this).load(song.getAlbumCoverUrl()).into(binding.favAlbumCover);
                 } else {
-                    Snackbar.make(binding.getRoot(), "Song not found", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(binding.getRoot(), R.string.song_not_found, Snackbar.LENGTH_SHORT).show();
                 }
             });
         });
@@ -138,8 +138,8 @@ public class FavoriteSongDetail extends AppCompatActivity {
             if (song != null) {
                 db.songDao().delete(song);
                 runOnUiThread(() -> {
-                    Snackbar.make(binding.getRoot(), "Song deleted", Snackbar.LENGTH_LONG)
-                            .setAction("Undo", undoView -> undoDelete(song))
+                    Snackbar.make(binding.getRoot(), R.string.song_deleted_text, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.undo_text, undoView -> undoDelete(song))
                             .show();
                 });
             }
@@ -157,7 +157,7 @@ public class FavoriteSongDetail extends AppCompatActivity {
     private void undoDelete(Song song) {
         executor.execute(() -> {
             db.songDao().insert(song);
-            runOnUiThread(() -> Snackbar.make(binding.getRoot(), "Undo successful", Snackbar.LENGTH_SHORT).show());
+            runOnUiThread(() -> Snackbar.make(binding.getRoot(), R.string.undo_successfull_text, Snackbar.LENGTH_SHORT).show());
         });
     }
 

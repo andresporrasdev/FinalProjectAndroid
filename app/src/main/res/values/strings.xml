@@ -13,4 +13,16 @@
     <string name="delete_text">Delete</string>
     <string name="favorite_list_text">FAVORITE LIST</string>
     <string name="Deezer_song_search_text">Deezer song search</string>
+    <string name="error_artist">No artists found</string>
+    <string name="error_parsing_data">Error parsing data</string>
+    <string name="error_fetch_data_text">Error fetching data</string>
+    <string name="add_favorite_text">Added to Favorite List</string>
+    <string name="close_text">Close</string>
+    <string name="error_parsing_tracklist">Error parsing tracklist</string>
+    <string name="error_fetch_tracklist">Error fetching tracklist</string>
+    <string name="no_song_id_text">No song ID provided</string>
+    <string name="song_not_found">Song not found</string>
+    <string name="song_deleted_text">Song deleted</string>
+    <string name="undo_text">Undo</string>
+    <string name="undo_successfull_text">Undo successful</string>
 </resources>
