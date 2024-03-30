@@ -2,19 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="DeezerSongActivityTest">
+      <entry key="ActivityLaunchTest">
         <State />
       </entry>
-      <entry key="DeleteTest">
+      <entry key="AlertDialogTest">
         <State />
       </entry>
       <entry key="FavoriteListTest">
         <State />
       </entry>
-      <entry key="MainActivityTest">
+      <entry key="InputTest">
         <State />
       </entry>
-      <entry key="SearchTest">
+      <entry key="SharedPreferenceTest">
         <State />
       </entry>
       <entry key="app">

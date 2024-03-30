@@ -23,12 +23,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+/**
+ * An {@link AppCompatActivity} that displays a list of favorite songs stored in the application's database.
+ * Users can view all their favorite songs, click on a song to see its details, or navigate to other parts of the application
+ * using the options menu.
+ *
+ * The activity uses a {@link RecyclerView} to list the songs and employs an {@link ExecutorService} to fetch the song data
+ * asynchronously from the database to ensure the UI remains responsive.
+ */
 public class SongFav extends AppCompatActivity {
     private RecyclerView favSongList;
     private List<Song> songs = new ArrayList<>();
     private SongDatabase db;
     private ExecutorService executor = Executors.newSingleThreadExecutor();
-
+    /**
+     * Initializes the activity, RecyclerView for displaying songs, and sets up the toolbar.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     *                           this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,12 +90,21 @@ public class SongFav extends AppCompatActivity {
 
         fetchSongsFromDatabase(adapter);
     }
+    /**
+     * Inflates the menu and adds items to the action bar if it is present.
+     *
+     * @param menu The options menu in which you place your items.
+     * @return You must return true for the menu to be displayed; if you return false it will not be shown.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.song_menu, menu);
 
         return true;
     }
+    /**
+     * Displays a help dialog with instructions on using the app.
+     */
     private void showHelpDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.help_title);
@@ -92,7 +114,12 @@ public class SongFav extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
+    /**
+     * Handles action bar item clicks.
+     *
+     * @param item The menu item that was clicked.
+     * @return Boolean Return false to allow normal menu processing to proceed, true to consume it here.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.my_favorite) {
@@ -109,7 +136,11 @@ public class SongFav extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
+    /**
+     * Fetches the list of favorite songs from the database on a separate thread and updates the adapter.
+     *
+     * @param adapter The adapter for the RecyclerView that displays the favorite songs.
+     */
     private void fetchSongsFromDatabase(final RecyclerView.Adapter<SongViewHolder> adapter) {
         executor.execute(() -> {
             songs = db.songDao().getAll();
@@ -118,6 +149,9 @@ public class SongFav extends AppCompatActivity {
     }
 
 
+    /**
+     * ViewHolder for song items in the RecyclerView.
+     */
     static class SongViewHolder extends RecyclerView.ViewHolder {
         TextView songTitle;
 
@@ -126,7 +160,9 @@ public class SongFav extends AppCompatActivity {
             songTitle = itemView.findViewById(android.R.id.text1);
         }
     }
-
+    /**
+     * Shuts down the executor and closes the database when the activity is destroyed.
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -1,3 +1,11 @@
+/*
+ * FileName: DeezerSongDetailActivity.java
+ * Purpose: Activity for displaying the details of a song from Deezer and allowing the user to add it to favorites.
+ * Provides functionality to interact with the UI elements defined in the ActivityDeezerSongDetailBinding.
+ * Author: Jiaxin Yan
+ * Lab Section: 022
+ * Creation Date: 03/28/2024
+ */
 package algonquin.cst2335.finalprojectandroid;
 
 import android.content.Intent;
@@ -13,7 +21,15 @@ import com.bumptech.glide.Glide;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import algonquin.cst2335.finalprojectandroid.databinding.ActivityDeezerSongDetailBinding;
-
+/**
+ * DeezerSongDetailActivity
+ * Activity for displaying the details of a song from Deezer and allowing the user to add it to favorites.
+ * Provides functionality to interact with the UI elements defined in the ActivityDeezerSongDetailBinding.
+ *
+ * @author Jiaxin Yan
+ * @lab_section 022
+ * @creation_date 03/28/2024
+ */
 public class DeezerSongDetailActivity extends AppCompatActivity {
     private ActivityDeezerSongDetailBinding binding;
     private SongDatabase db;
@@ -74,6 +90,11 @@ public class DeezerSongDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    /**
+     * Shows a dialog to the user with help information on how to use the application.
+     * The dialog displays a message explaining the different functionalities and
+     * provides a "Close" button that dismisses the dialog.
+     */
     private void showHelpDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.help_title);

@@ -1,3 +1,13 @@
+/*
+ * FileName: FavoriteSongDetail.java
+ * Purpose: Activity for displaying the details of a favorite song stored in the application's Room database.
+ * Allows users to view song details, delete a song from their favorites, and undo the deletion.
+ * It is assumed that the intent launching this activity includes an extra with the key "SONG_ID"
+ * indicating the ID of the song to display.
+ * Author: Jiaxin Yan
+ * Lab Section: 022
+ * Creation Date: 03/28/2024
+ */
 package algonquin.cst2335.finalprojectandroid;
 
 import android.content.Intent;
@@ -12,7 +22,16 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import algonquin.cst2335.finalprojectandroid.databinding.ActivityFavoriteSongDetailBinding;
-
+/**
+ * Activity for displaying the details of a favorite song stored in the application's Room database.
+ * Allows users to view song details, delete a song from their favorites, and undo the deletion.
+ * It is assumed that the intent launching this activity includes an extra with the key "SONG_ID"
+ * indicating the ID of the song to display.
+ *
+ * @author Jiaxin Yan
+ * @lab_section 022
+ * @creation_date 03/28/2024
+ */
 public class FavoriteSongDetail extends AppCompatActivity {
     private ActivityFavoriteSongDetailBinding binding;
     private SongDatabase db;
@@ -61,6 +80,11 @@ public class FavoriteSongDetail extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    /**
+     * Shows a dialog to the user with help information on how to use the application.
+     * The dialog displays a message explaining the different functionalities and
+     * provides a "Close" button that dismisses the dialog.
+     */
     private void showHelpDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.help_title);
@@ -73,6 +97,16 @@ public class FavoriteSongDetail extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+    /**
+     * Loads and displays the song details from the database for the given song ID. If the song is found,
+     * the title, album name, duration, and album cover are set into the respective views. If the song
+     * cannot be found, a Snackbar is displayed to inform the user that the song was not found.
+     * This method uses an {@code ExecutorService} to perform the database operation on a background thread
+     * to avoid blocking the main thread, which could cause the UI to freeze. Once the song data is retrieved,
+     * it then uses {@code runOnUiThread} to update the UI elements on the main thread.
+     *
+     * @param songId The unique ID of the song to load details for. This should be a valid ID that exists in the database.
+     */
     private void loadSongDetails(int songId) {
         executor.execute(() -> {
             Song song = db.songDao().findById(songId);
@@ -89,7 +123,15 @@ public class FavoriteSongDetail extends AppCompatActivity {
             });
         });
     }
-
+    /**
+     * Deletes a song from the database asynchronously based on the song ID provided. If the song is found and
+     * successfully deleted, a Snackbar is displayed with an "Undo" action that allows the user to revert the deletion.
+     * The database operations are performed on a background thread provided by an {@code ExecutorService} to prevent
+     * UI blocking, and UI updates are queued on the main thread using {@code runOnUiThread}.
+     *
+     * @param songId The ID of the song to be deleted from the database. The ID should correspond to a song
+     *               that exists in the database, otherwise no action will be taken.
+     */
     private void deleteSong(int songId) {
         executor.execute(() -> {
             Song song = db.songDao().findById(songId);
@@ -103,7 +145,15 @@ public class FavoriteSongDetail extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * Reverses the deletion of a song by reinserting the provided song object into the database.
+     * This is typically used as an "Undo" feature, allowing users to restore a song they have just deleted.
+     * The operation is performed asynchronously to avoid blocking the UI thread. Upon successful reinsertion,
+     * a Snackbar notification is displayed to inform the user that the undo operation was successful.
+     *
+     * @param song The song object to be reinserted into the database. This should be a non-null Song instance
+     *             that was previously deleted from the database.
+     */
     private void undoDelete(Song song) {
         executor.execute(() -> {
             db.songDao().insert(song);

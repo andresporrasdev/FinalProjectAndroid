@@ -141,6 +141,11 @@ public class DeezerSongActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+    /**
+     * Sets up the RecyclerView with a LinearLayoutManager and an anonymous adapter. This adapter is responsible
+     * for creating view holders for items, binding song data to these views, and handling click events which
+     * start the DeezerSongDetailActivity with the selected song's details.
+     */
     private void setupRecyclerView() {
         binding.artistItem.setLayoutManager(new LinearLayoutManager(this));
         binding.artistItem.setAdapter(new RecyclerView.Adapter<RecyclerView.ViewHolder>() {

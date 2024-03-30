@@ -1,3 +1,10 @@
+/*
+ * FileName: AlertDialogTest.java
+ * Purpose: Tests the display of an AlertDialog in the MainActivity.
+ * Author: Jiaxin Yan
+ * Lab Section: 022
+ * Creation Date: 03/28/2024
+ */
 package algonquin.cst2335.finalprojectandroid;
 
 
@@ -27,78 +34,47 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * Tests the display of an AlertDialog in the MainActivity.
+ * The test ensures that when the AlertDialog is triggered,
+ * the expected message is displayed to the user.
+ */
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class AlertDialogTest {
 
+    /**
+     * ActivityScenarioRule launches a given activity before the test starts and
+     * closes it after the test.
+     */
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
+    /**
+     * Checks that the AlertDialog displays the correct informational message to the user.
+     * It simulates the user actions to open the dialog and then verifies the text content.
+     */
     @Test
     public void alertDialogTest() {
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        // Directly accessing sleep is not recommended; instead, use Idling Resources
         try {
             Thread.sleep(5838);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        ViewInteraction materialButton = onView(
-                allOf(withId(R.id.btnDeezerSongSearch), withText("Deezer song search"),
-                        childAtPosition(
-                                allOf(withId(R.id.main),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        materialButton.perform(click());
+        // Simulate user action to click the button that shows the AlertDialog
+        onView(withId(R.id.btnDeezerSongSearch)).perform(click());
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(700);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // Simulate user action to open the information dialog
+        onView(withId(R.id.info)).perform(click());
 
-        ViewInteraction actionMenuItemView = onView(
-                allOf(withId(R.id.info), withContentDescription("Info"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.toolbar),
-                                        1),
-                                2),
-                        isDisplayed()));
-        actionMenuItemView.perform(click());
-
-        ViewInteraction textView = onView(
-                allOf(withId(android.R.id.message), withText("Here's how to use this app:\n\n1. Enter the name of the artist in the search field.\n2. Click the Search button to find songs by the artist.\n3. Tap on a song to see more details about it.\n4. Press the Add to Favorites button to save the song to your favorites list.\n5. Access the menu to navigate through the app.\n6. In the Favorites list, click on a song to view its details.\n7. To remove a song from the list, press the Delete button."),
-                        withParent(withParent(withId(androidx.appcompat.R.id.scrollView))),
-                        isDisplayed()));
-        textView.check(matches(isDisplayed()));
+        // Check that the AlertDialog is displayed with the correct message
+        onView(withId(android.R.id.message))
+                .check(matches(withText("Here's how to use this app:\n\n1. Enter the name of the artist in the search field.\n2. Click the Search button to find songs by the artist.\n3. Tap on a song to see more details about it.\n4. Press the Add to Favorites button to save the song to your favorites list.\n5. Access the menu to navigate through the app.\n6. In the Favorites list, click on a song to view its details.\n7. To remove a song from the list, press the Delete button.")))
+                .check(matches(isDisplayed()));
     }
 
-    private static Matcher<View> childAtPosition(
-            final Matcher<View> parentMatcher, final int position) {
 
-        return new TypeSafeMatcher<View>() {
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("Child at position " + position + " in parent ");
-                parentMatcher.describeTo(description);
-            }
-
-            @Override
-            public boolean matchesSafely(View view) {
-                ViewParent parent = view.getParent();
-                return parent instanceof ViewGroup && parentMatcher.matches(parent)
-                        && view.equals(((ViewGroup) parent).getChildAt(position));
-            }
-        };
-    }
 }
