@@ -15,16 +15,28 @@
         android:theme="@style/Theme.FinalProjectAndroid"
         tools:targetApi="31">
         <activity
-            android:name=".SavedRecipesDetailActivity"
+            android:name=".sslookup.LocationDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".SavedRecipesActivity"
+            android:name=".SSLookupActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".Dictionary"
+            android:exported="false" />
+        <activity
+            android:name=".RecipeSearchActivity"
             android:exported="false" />
         <activity
             android:name=".RecipeDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".RecipeSearchActivity"
+            android:name=".SavedRecipesDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SavedRecipesActivity"
+            android:exported="false" />  
+      <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

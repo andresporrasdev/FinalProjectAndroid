@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">安卓期末项目</string>
+    <string name="latitude_">纬度：</string>
+    <string name="enter_latitude">输入纬度</string>
+    <string name="longitude_">经度：</string>
+    <string name="enter_longitude">输入经度</string>
+    <string name="lookup">查询</string>
+    <string name="sunrise_">日出：\u0020</string>
+    <string name="sunset_">日落：\u0020</string>
+    <string name="location_">位置：\u0020</string>
+    <string name="save_location">保存位置</string>
+    <string name="view_favorites">查看收藏</string>
+    <string name="latitude">纬度</string>
+    <string name="longitude">经度</string>
+    <string name="location">位置</string>
+    <string name="app_sunset_sunset_lookup">日出日落查询</string>
+    <string name="sunrise_time">日出时间</string>
+    <string name="sunset_time">日落时间</string>
+    <string name="invalid_latitude_or_longitude">无效的纬度或经度</string>
+    <string name="location_saved_successfully">位置保存成功</string>
+    <string name="instruction_title">帮助</string>
+    <string name="instruction_body_welcome"><![CDATA[欢迎使用日出日落查询应用！本应用可以让您找到任何指定纬度和经度的地点的日出和日落时间。\n\n]]></string>
+    <string name="instruction_body_how_to_use">如何使用：\n</string>
+    <string name="instuction_body_tips">提示：\n</string>
+    <string name="instuction_body_ask_for_assistance">如果您需要进一步的帮助或遇到任何问题，请随时联系我们的支持团队。</string>
+    <string name="instuction_body_how_to_use_1">- 输入纬度和经度：在提供的文本字段中输入您希望找到日出和日落时间的纬度和经度。纬度和经度应为十进制格式。\n</string>
+    <string name="instuction_body_how_to_use_2">- 查询日出和日落时间：按下‘查询’按钮，获取所输入位置的日出和日落时间。\n</string>
+    <string name="instuction_body_how_to_use_3">- 保存位置：如果您希望将位置保存以供将来参考，请在查询时间后按下‘保存位置’按钮。这将把位置存储在您的收藏列表中。\n</string>
+    <string name="instuction_body_how_to_use_4">- 查看保存的位置：点击‘查看收藏’，可以查看所有保存的位置及其日出和日落时间。您可以点击列表中的任何一个位置查看更多详情或从收藏中删除。\n\n</string>
+    <string name="instuction_body_tips_1">- 确保纬度和经度的准确性，以获得准确的日出和日落时间。\n</string>
+    <string name="instuction_body_tips_2">- 对于赤道以南的纬度和本初子午线以西的经度，使用负值。\n\n</string>
+    <string name="ok">好的</string>
+    <string name="error_fetching_data">获取数据出错</string>
+    <string name="error_parsing_data">解析数据出错</string>
+    <string name="toolbar_app_name"><![CDATA[日出日落查询应用]]></string>
+    <string name="location_not_available">位置不可用</string>
+    <string name="location_deleted">位置已删除</string>
+</resources>

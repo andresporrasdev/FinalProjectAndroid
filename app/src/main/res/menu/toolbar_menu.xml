@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_sun"
+        android:icon="@drawable/sun"
+        android:title="Sun"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_recipe"
+        android:icon="@drawable/recipe"
+        android:title="Recipe"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_dictionary"
+        android:icon="@drawable/dictionary"
+        android:title="Dictionary"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_album"
+        android:icon="@drawable/album"
+        android:title="Album"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+</menu>
