@@ -11,6 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import algonquin.cst2335.finalprojectandroid.dictionary.Dictionary;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

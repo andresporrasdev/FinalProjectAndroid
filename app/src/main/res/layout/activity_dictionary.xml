@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Dictionary">
+    tools:context=".dictionary.Dictionary">
 
     <TextView
         android:id="@+id/dictionaryTextView"
@@ -40,11 +40,11 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="SavedDefinitions"
+        app:layout_constraintBottom_toTopOf="@+id/savedDefinitions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchEditText"
@@ -79,6 +79,16 @@
         app:layout_constraintStart_toStartOf="@+id/dictionaryTextView"
         app:layout_constraintTop_toBottomOf="@+id/dictionaryTextView"
         app:srcCompat="@android:drawable/ic_menu_search" />
+
+    <Button
+        android:id="@+id/savedDefinitions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
