@@ -59,7 +59,7 @@ public class Dictionary extends AppCompatActivity {
     androidx.appcompat.widget.Toolbar toolbar;
     RequestQueue queue;
 
-//    private WordDefinitionAdapter adapter;
+    private WordDefinitionAdapter adapter;
 
 
     @Override
@@ -77,8 +77,8 @@ public class Dictionary extends AppCompatActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-//        adapter = new WordDefinitionAdapter(wordDefinitionsList);
-//        recyclerView.setAdapter(adapter);
+        adapter = new WordDefinitionAdapter(wordDefinitionsList);
+        recyclerView.setAdapter(adapter);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -133,6 +133,129 @@ public class Dictionary extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(Dictionary.this, "Error parsing response", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public class WordDefinitionAdapter extends RecyclerView.Adapter<WordDefinitionAdapter.ViewHolder> {
+        private List<DictionaryItem> wordDefinitionsList;
+
+        /**
+         * ViewHolder class for displaying word definitions and managing favorites in RecyclerView items.
+         */
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            TextView definitionTextView;
+            androidx.appcompat.widget.Toolbar definitionsMenu;
+
+            /**
+             * Constructs a new ViewHolder for displaying word definitions and managing favorites in a RecyclerView item.
+             * @param itemView The view representing a single item in the RecyclerView.
+             */
+            public ViewHolder(View itemView) {
+                super(itemView);
+                definitionTextView = itemView.findViewById(R.id.definitionTextView);
+                definitionsMenu = itemView.findViewById(R.id.definitionsToolbar);
+            }
+
+            /**
+             * Binds a definition to the ViewHolder item.
+             * @param definition The definition text to be displayed
+             */
+            public void bind(String definition) {
+                definitionTextView.setText(definition);
+            }
+        }
+
+        /**
+         * Constructs a new WordDefinitionAdapter to manage the display of word definitions in a RecyclerView.
+         * @param wordDefinitionsList The list of DictionaryItem objects containing word definitions to be displayed.
+         */
+        public WordDefinitionAdapter(List<DictionaryItem> wordDefinitionsList) {
+            this.wordDefinitionsList = wordDefinitionsList;
+        }
+
+        /**
+         * Called by RecyclerView when it needs a new ViewHolder of the given type to represent an item.
+         * @param parent   The ViewGroup into which the new View will be added after it is bound to an adapter position
+         * @param viewType The type of the new View
+         * @return A new ViewHolder that holds a View of the given view type
+         */
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.definition_list, parent, false);
+            return new ViewHolder(view);
+        }
+
+        /**
+         * Called by RecyclerView to display the data at the specified position.
+         * @param holder   The ViewHolder which should be updated to represent the contents of the item at the given position
+         * @param position The position of the item within the adapter's data set
+         */
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            String definition = wordDefinitionsList.get(position).getDefinitions();
+            holder.bind(definition);
+
+            db = Room.databaseBuilder(Dictionary.this, DictionaryDatabase.class, "dictionaryDatabase").build();
+            DictionaryItemDAO dDAO = db.dictionaryItemDAO();
+            androidx.appcompat.widget.Toolbar toolbar = holder.definitionsMenu;
+            toolbar.inflateMenu(R.menu.definitions_menu);
+
+            toolbar.setOnMenuItemClickListener(item -> {
+                if (item.getItemId() == R.id.save) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Dictionary.this);
+                    builder.setMessage("Do you want to add this Definition to your Favorites?")
+                            .setTitle("Add")
+                            .setNegativeButton("No", (dialog, which) -> {
+                            })
+                            .setPositiveButton("Yes", (dialog, which) -> {
+
+                                DictionaryItem definitionToAdd = wordDefinitionsList.get(position);
+                                favsList.add(definitionToAdd);
+
+                                if (definitionToAdd != null) {
+                                    Executor thread1 = Executors.newSingleThreadExecutor();
+                                    thread1.execute(() -> {
+                                        try {
+                                            // Ensure that the insertItemDefinition method is correctly implemented
+                                            dDAO.insertItemDefinition(definitionToAdd);
+                                            Log.d("InsertResult", "Rows affected: " + definitionToAdd);
+                                        } catch (Exception e) {
+                                            Log.e("InsertError", "Error inserting definition", e);
+                                        }
+                                    });
+
+                                    // Log to check if the definition is being added to the list
+                                    Log.d("Definition", "Definition to add: " + definitionToAdd);
+
+                                    Snackbar.make(findViewById(android.R.id.content), "Definition added to favourites", Snackbar.LENGTH_LONG)
+                                            .setAction("Undo", (btn) -> {
+                                                Executor thread2 = Executors.newSingleThreadExecutor();
+                                                thread2.execute(() -> {
+                                                    // undo the addition from the database
+                                                    dDAO.deleteItemDefinition(definitionToAdd);
+                                                });
+                                                // undo the addition from the list
+                                                wordDefinitionsList.remove(definitionToAdd);
+                                                // Notify adapter of the data change
+                                                adapter.notifyItemRemoved(position);
+                                            }).show();
+                                }
+                            });
+                    builder.create().show();
+                }
+                return false;
+            });
+        }
+
+        /**
+         * Returns the total number of items in the data set held by the adapter.
+         *
+         * @return The total number of items in this adapter's data set
+         */
+        @Override
+        public int getItemCount() {
+            return wordDefinitionsList.size();
         }
     }
 
