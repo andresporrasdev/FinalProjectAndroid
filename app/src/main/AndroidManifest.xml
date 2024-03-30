@@ -27,6 +27,15 @@
             android:name=".RecipeSearchActivity"
             android:exported="false" />
         <activity
+            android:name=".RecipeDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SavedRecipesDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SavedRecipesActivity"
+            android:exported="false" />  
+      <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
