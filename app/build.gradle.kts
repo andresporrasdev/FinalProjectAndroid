@@ -42,17 +42,22 @@ dependencies {
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.room:room-runtime:2.4.2")
+//    implementation(fileTree(mapOf("dir" to "C:\\Users\\p2277\\AppData\\Local\\Android\\Sdk\\platforms\\android-34", "include" to listOf("*.aar", "*.jar"), "exclude" to listOf(""))))
+
     annotationProcessor("androidx.room:room-compiler:2.4.2")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("com.google.android.material:material:1.4.0")
+
+    implementation("com.google.android.material:material:1.9.0")
 
     implementation("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
 
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.4.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
+
     androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation("androidx.test:rules:1.4.0")
+
 }

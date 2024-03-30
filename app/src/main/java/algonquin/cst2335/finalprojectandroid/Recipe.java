@@ -17,7 +17,6 @@ import androidx.room.PrimaryKey;
  * Entity class representing a recipe in the database.
  * This class is used by Room to create the recipes table, with fields representing the table columns.
  *
- * @Entity(tableName = "recipes") Defines the table name in the database.
  */
 @Entity(tableName = "recipes")
 public class Recipe {
