@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">FinalProjectAndroid</string>
+    <string name="toolbar_title">Recipe Explore</string>
+    <string name="search">Search</string>
+    <string name="info">User Guide</string>
+    <string name="my_recipe">My Recipes</string>
+    <string name="toolbar_title_saved">Saved Recipes</string>
+    <string name="rtitle">Title</string>
+    <string name="rsummary">Summary</string>
+    <string name="rurl">url</string>
+    <string name="rdelete">delete recipe</string>
+    <string name="rsave">save recipe</string>
+    <string name="id_err">Error: Recipe ID is missing</string>
+    <string name="ps_err">Error parsing recipe data</string>
+    <string name="nt_err">Network error. Please try again.</string>
+    <string name="et_err">Please enter a recipe name.</string>
+    <string name="ec_err">Error encoding recipe name</string>
+    <string name="guide_title">How to use this interface</string>
+    <string name="guide_message">Here you can find instructions on how to use this interface:\n\n1. Type keyword and press \'Search\' button\n2. In results, click one item for detail.\n3. Press \'Save\' button to save recipe to your list\n4. In menu on the top right corner, you can access recipe list.\n5. In the saved recipe list, you can click one item for detail and delete it.</string>
+    <string name="no_recipe">No Saved recipes found</string>
+    <string name="delete_recipe_title">Delete Recipe</string>
+    <string name="delete_recipe_message">Are you sure you want to delete this recipe?</string>
+    <string name="delete_confirm">Delete</string>
+    <string name="recipe_deleted_successfully">Recipe deleted successfully</string>
+    <string name="fc_err">Error fetching recipe details</string>
+    <string name="delete_no">No</string>
+    <string name="delete_yes">Yes</string>
+    <string name="save_recipe">Recipe Saved!</string>
 </resources>

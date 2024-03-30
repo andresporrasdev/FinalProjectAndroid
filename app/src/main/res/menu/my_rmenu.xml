@@ -5,13 +5,14 @@
 
     <item
         android:id="@+id/item1"
-        android:title="info"
+        android:title="@string/info"
         android:icon="@drawable/info"
-        app:showAsAction="always"/>
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/item2"
-        android:title="My Recipes"
-        app:showAsAction="never"/>
+        android:title="@string/my_recipe"
+        android:icon="@drawable/list2"
+        app:showAsAction="always"/>
 
 </menu>

@@ -1,13 +1,16 @@
 package algonquin.cst2335.finalprojectandroid;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +26,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
@@ -38,7 +43,7 @@ public class RecipeSearchActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
     private ActivityRecipeSearchBinding binding;
     private RecyclerView.Adapter myRecipeAdapter;
-    private final String MY_KEY = "774f605053f045abad38658ffe65170b";
+    private final String MY_KEY = "4e00cca874f74f3f9832355559576c8e";
     private final String URL_REQUEST_DATA = "https://api.spoonacular.com/recipes/complexSearch?query=";
     protected RequestQueue queue;
     protected String recipeName;
@@ -61,6 +66,13 @@ public class RecipeSearchActivity extends AppCompatActivity {
 
         binding.searchButton.setOnClickListener( click -> {
             recipeName = binding.recipeSearchEditText.getText().toString();
+
+            InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            View currentFocusedView = getCurrentFocus();
+            if (currentFocusedView != null) {
+                inputManager.hideSoftInputFromWindow(currentFocusedView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+
             saveSearchTerm(recipeName);
             try {
                 if (!recipeName.isEmpty()) {
@@ -88,20 +100,20 @@ public class RecipeSearchActivity extends AppCompatActivity {
 
                                 } catch (Exception e) {
                                     Log.e(TAG, "Error parsing JSON response", e);
-                                    Toast.makeText(RecipeSearchActivity.this, "Error parsing recipe data", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RecipeSearchActivity.this, getString(R.string.ps_err), Toast.LENGTH_SHORT).show();
                                 }
                             },
                             (error) -> {
                                 Log.e(TAG, "Error:" + error.getMessage());
-                                Snackbar.make(click, "Network error. Please try again.", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(click, getString(R.string.nt_err), Snackbar.LENGTH_SHORT).show();
                             });
                     queue.add(request);
                 } else {
-                    Snackbar.make(click, "Please enter a recipe name.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(click, getString(R.string.et_err), Snackbar.LENGTH_SHORT).show();
                 }
             }
             catch (Exception e) {
-                Log.e(TAG, "Error encoding recipe name");
+                Log.e(TAG, getString(R.string.ec_err));
             }
         });
 
@@ -118,7 +130,9 @@ public class RecipeSearchActivity extends AppCompatActivity {
                 Recipe recipe = recipes.get(position);
                 String imageUrl = recipe.getImage();
                 Glide.with(holder.itemView.getContext())
-                     .load(imageUrl).into(holder.imageView);
+                     .load(imageUrl)
+                        .transform(new CenterCrop(), new RoundedCorners(50))
+                        .into(holder.imageView);
                 holder.titleText.setText(recipe.getTitle());
             }
 
@@ -195,13 +209,8 @@ public class RecipeSearchActivity extends AppCompatActivity {
 
     public void showInstructionsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("How to use this interface.")
-                .setMessage("Here you can find instructions on how to use this interface:\n\n" +
-                        "1. Type keyword and press 'Search' button\n" +
-                        "2. In results, click one item for detail.\n" +
-                        "3. Press 'Save' button to save recipe to your list\n" +
-                        "4. In menu on the top right corner, you can access recipe list.\n" +
-                        "5. In the saved recipe list, you can click one item for detail and delete it.\n")
+        builder.setTitle(getString(R.string.guide_title))
+                .setMessage(getString(R.string.guide_message))
                 .setPositiveButton("OK", (dialog, ck) -> dialog.dismiss());
         AlertDialog dialog = builder.create();
         dialog.show();
