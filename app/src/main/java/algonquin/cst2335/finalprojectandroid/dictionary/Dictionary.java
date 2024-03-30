@@ -85,8 +85,63 @@ public class Dictionary extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        searchButton.setOnClickListener(v -> {
+            String searchTerm = searchEditText.getText().toString().trim();
+            if (!searchTerm.isEmpty()) {
+                saveSearchedWord(searchTerm);
+                String apiUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/" + searchTerm;
+
+                JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, apiUrl, null,
+                        response -> handleResponse(response, searchTerm),
+                        error -> Toast.makeText(Dictionary.this, "Error: The word searched can not be found", Toast.LENGTH_SHORT).show());
+                queue.add(jsonArrayRequest);
+            } else {
+                Toast.makeText(this, "Enter a search term", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    } // end main method
+
+    private void handleResponse(JSONArray response, String searchTerm) {
+        try {
+            wordDefinitionsList.clear(); // Clear the existing list
+
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject wordObject = response.getJSONObject(i);
+                JSONArray meanings = wordObject.getJSONArray("meanings");
+
+                StringBuilder definitionsString = new StringBuilder();
+
+                for (int j = 0; j < meanings.length(); j++) {
+                    JSONObject meaning = meanings.getJSONObject(j);
+                    JSONArray definitionsArray = meaning.getJSONArray("definitions");
+
+                    for (int k = 0; k < definitionsArray.length(); k++) {
+                        JSONObject definitionObject = definitionsArray.getJSONObject(k);
+                        String definition = definitionObject.getString("definition");
+                        definitionsString.append(definition).append("\n");
+                    }
+                }
+                wordDefinitionsList.add(new DictionaryItem(searchTerm, definitionsString.toString()));
+            }
+
+            // Update RecyclerView
+//            adapter.notifyDataSetChanged(); // Notify adapter of the data change
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(Dictionary.this, "Error parsing response", Toast.LENGTH_SHORT).show();
+        }
     }
 
+    private void saveSearchedWord(String searchTerm) {
+        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("last_searched_word", searchTerm);
+        editor.apply();
+    }
     private void showHelpInformation() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Help Information");
