@@ -16,7 +16,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.allOf;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +68,7 @@ public class FavoriteListTest {
         onView(withId(R.id.my_favorite)).perform(click());
 
         // Verifies that the "FAVORITE LIST" title is displayed on the screen
-        onView(withId(R.id.favoriteTitle)).check(matches(withText("FAVORITE LIST")));
+        onView(withId(R.id.favoriteTitle)).check(matches(withText(R.string.favorite_list_text)));
     }
 
 

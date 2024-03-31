@@ -72,7 +72,7 @@ public class AlertDialogTest {
 
         // Check that the AlertDialog is displayed with the correct message
         onView(withId(android.R.id.message))
-                .check(matches(withText("Here's how to use this app:\n\n1. Enter the name of the artist in the search field.\n2. Click the Search button to find songs by the artist.\n3. Tap on a song to see more details about it.\n4. Press the Add to Favorites button to save the song to your favorites list.\n5. Access the menu to navigate through the app.\n6. In the Favorites list, click on a song to view its details.\n7. To remove a song from the list, press the Delete button.")))
+                .check(matches(withText(R.string.help_message)))
                 .check(matches(isDisplayed()));
     }
 

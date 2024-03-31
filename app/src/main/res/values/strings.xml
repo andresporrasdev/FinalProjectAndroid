@@ -14,7 +14,6 @@
     <string name="favorite_list_text">FAVORITE LIST</string>
     <string name="Deezer_song_search_text">Deezer song search</string>
     <string name="error_artist">No artists found</string>
-    <string name="error_parsing_data">Error parsing data</string>
     <string name="error_fetch_data_text">Error fetching data</string>
     <string name="add_favorite_text">Added to Favorite List</string>
     <string name="close_text">Close</string>
@@ -25,7 +24,7 @@
     <string name="song_deleted_text">Song deleted</string>
     <string name="undo_text">Undo</string>
     <string name="undo_successfull_text">Undo successful</string>
-    <string name="Deezer_Song">Deezer_Song</string>
+    <string name="Deezer_Song">Deezer Song</string>
     <string name="app_name">FinalProjectAndroid</string>
     <string name="toolbar_title">Recipe Explore</string>
     <string name="search">Search</string>
