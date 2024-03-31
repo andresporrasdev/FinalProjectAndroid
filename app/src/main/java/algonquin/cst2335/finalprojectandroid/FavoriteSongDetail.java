@@ -44,6 +44,7 @@ public class FavoriteSongDetail extends AppCompatActivity {
         binding = ActivityFavoriteSongDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle(R.string.Deezer_Song);
 
         db = Room.databaseBuilder(getApplicationContext(), SongDatabase.class, "song-database").build();
         executor = Executors.newSingleThreadExecutor();

@@ -48,6 +48,7 @@ public class SongFav extends AppCompatActivity {
         setContentView(R.layout.activity_song_fav);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.Deezer_Song);
         favSongList = findViewById(R.id.favSongList);
         favSongList.setLayoutManager(new LinearLayoutManager(this));
 

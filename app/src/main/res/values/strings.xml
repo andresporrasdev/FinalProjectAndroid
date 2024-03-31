@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Deezer Song</string>
+    <string name="app_name">Android Project</string>
     <string name="help_title">Using Guide</string>
     <string name="help_message">Here\'s how to use this app:\n\n1. Enter the name of the artist in the search field.\n2. Click the "Search" button to find songs by the artist.\n3. Tap on a song to see more details about it.\n4. Press the "Add to Favorites" button to save the song to your favorites list.\n5. Access the menu to navigate through the app.\n6. In the Favorites list, click on a song to view its details.\n7. To remove a song from the list, press the "Delete" button.</string>
     <string name="search_button_text">Search</string>
@@ -25,4 +25,5 @@
     <string name="song_deleted_text">Song deleted</string>
     <string name="undo_text">Undo</string>
     <string name="undo_successfull_text">Undo successful</string>
+    <string name="Deezer_Song">Deezer_Song</string>
 </resources>

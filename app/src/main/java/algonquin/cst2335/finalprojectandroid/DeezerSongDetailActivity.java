@@ -41,6 +41,7 @@ public class DeezerSongDetailActivity extends AppCompatActivity {
         binding = ActivityDeezerSongDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle(R.string.Deezer_Song);
         db = Room.databaseBuilder(getApplicationContext(),
                 SongDatabase.class, "song-database").build();
 

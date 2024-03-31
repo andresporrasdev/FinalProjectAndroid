@@ -75,6 +75,7 @@ public class DeezerSongActivity extends AppCompatActivity {
         binding = ActivityDeezerSongBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle(R.string.Deezer_Song);
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
         setupRecyclerView();
