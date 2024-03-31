@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">安卓期末專案</string>
+    <string name="toolbar_title">食譜探索</string>
+    <string name="search">搜尋</string>
+    <string name="info">用戶指南</string>
+    <string name="my_recipe">我的食譜</string>
+    <string name="toolbar_title_saved">已儲存的食譜</string>
+    <string name="rtitle">標題</string>
+    <string name="rsummary">摘要</string>
+    <string name="rurl">網址</string>
+    <string name="rdelete">刪除食譜</string>
+    <string name="rsave">儲存食譜</string>
+    <string name="id_err">錯誤：缺少食譜ID</string>
+    <string name="ps_err">錯誤解析食譜資料</string>
+    <string name="nt_err">網絡錯誤，請再試一次。</string>
+    <string name="et_err">請輸入食譜名稱。</string>
+    <string name="ec_err">編碼食譜名稱時出錯</string>
+    <string name="guide_title">如何使用此介面</string>
+    <string name="guide_message">這裡您可以找到如何使用此介面的指南：\n\n1. 輸入關鍵詞並按「搜索」按鈕\n2. 在結果中，點擊某個項目以查看詳情。\n3. 按下「保存」按鈕以將食譜保存到您的列表中\n4. 在右上角的菜單中，您可以訪問食譜列表。\n5. 在已保存的食譜列表中，您可以點擊某個項目查看詳情並刪除它。</string>
+    <string name="no_recipe">未找到已保存的食譜</string>
+    <string name="delete_recipe_title">刪除食譜</string>
+    <string name="delete_recipe_message">您確定要刪除此食譜嗎？</string>
+    <string name="delete_confirm">刪除</string>
+    <string name="recipe_deleted_successfully">食譜已成功刪除</string>
+    <string name="fc_err">獲取食譜詳情時出錯</string>
+    <string name="delete_no">否</string>
+    <string name="delete_yes">是</string>
+    <string name="save_recipe">食譜已保存！</string>
+</resources>

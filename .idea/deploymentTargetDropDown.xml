@@ -1,25 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="deploymentTargetDropDown">
-    <value>
-      <entry key="ActivityLaunchTest">
-        <State />
-      </entry>
-      <entry key="AlertDialogTest">
-        <State />
-      </entry>
-      <entry key="FavoriteListTest">
-        <State />
-      </entry>
-      <entry key="InputTest">
-        <State />
-      </entry>
-      <entry key="SharedPreferenceTest">
-        <State />
-      </entry>
-      <entry key="app">
-        <State />
-      </entry>
-    </value>
-  </component>
+    <component name="deploymentTargetDropDown">
+        <value>
+            <entry key="ActivityLaunchTest">
+                <State />
+            </entry>
+            <entry key="AlertDialogTest">
+                <State />
+            </entry>
+            <entry key="FavoriteListTest">
+                <State />
+            </entry>
+            <entry key="InputTest">
+                <State />
+            </entry>
+            <entry key="SharedPreferenceTest">
+                <State />
+            </entry>
+            <entry key="RecipeDetailActivityTest">
+                <State />
+            </entry>
+            <entry key="RecipeSearchActivityTest">
+                <State />
+            </entry>
+            <entry key="RecipeSearchActivityTest2">
+                <State />
+            </entry>
+            <entry key="SSLookupTest">
+                <State>
+                    <targetSelectedWithDropDown>
+                        <Target>
+                            <type value="QUICK_BOOT_TARGET" />
+                            <deviceKey>
+                                <Key>
+                                    <type value="VIRTUAL_DEVICE_PATH" />
+                                    <value value="$USER_HOME$/.android/avd/Pixel_7_API_27.avd" />
+                                </Key>
+                            </deviceKey>
+                        </Target>
+                    </targetSelectedWithDropDown>
+                    <timeTargetWasSelectedWithDropDown value="2024-03-29T01:08:11.665714Z" />
+                </State>
+            </entry>
+            <entry key="app">
+                <State>
+                    <targetSelectedWithDropDown>
+                        <Target>
+                            <type value="QUICK_BOOT_TARGET" />
+                            <deviceKey>
+                                <Key>
+                                    <type value="VIRTUAL_DEVICE_PATH" />
+                                    <value value="$USER_HOME$/.android/avd/Pixel_7_API_27.avd" />
+                                </Key>
+                            </deviceKey>
+                        </Target>
+                    </targetSelectedWithDropDown>
+                    <timeTargetWasSelectedWithDropDown value="2024-03-29T01:47:39.855016Z" />
+                </State>
+            </entry>
+            <entry key="lookupTest()">
+                <State />
+            </entry>
+            <entry key="lookupWithNegativeLatTest()">
+                <State />
+            </entry>
+            <entry key="lookupWithNegativeLatTest() (1)">
+                <State />
+            </entry>
+            <entry key="saveLocationTest()">
+                <State />
+            </entry>
+        </value>
+    </component>
 </project>
