@@ -7,7 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import algonquin.cst2335.finalprojectandroid.MainActivity;
 import algonquin.cst2335.finalprojectandroid.R;
+import algonquin.cst2335.finalprojectandroid.RecipeSearchActivity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -18,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,6 +83,11 @@ public class Dictionary extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new WordDefinitionAdapter(wordDefinitionsList);
         recyclerView.setAdapter(adapter);
+
+        viewSavedButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, FavoriteWords.class);
+            startActivity(intent);
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -285,6 +294,5 @@ public class Dictionary extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 
 } // end class
