@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_green"
     tools:context=".dictionary.Dictionary">
 
     <TextView
@@ -16,6 +17,7 @@
         android:layout_marginEnd="16dp"
         android:fontFamily="serif"
         android:text="Dictionary"
+        android:textColor="@color/black_pearl"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,6 +33,8 @@
         android:fontFamily="serif"
         android:hint="Search"
         android:iconifiedByDefault="false"
+        android:textColor="@color/dark_navy"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/searchButton"
         app:layout_constraintStart_toStartOf="@+id/dictionaryTextView"
         app:layout_constraintTop_toBottomOf="@+id/dictionaryTextView" />

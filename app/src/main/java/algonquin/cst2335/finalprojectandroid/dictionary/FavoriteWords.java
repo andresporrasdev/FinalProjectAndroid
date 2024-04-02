@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -32,19 +33,15 @@ public class FavoriteWords extends AppCompatActivity {
     private ArrayList<DictionaryItem> wordList = new ArrayList<>();
     private DictionaryViewModel wordModel;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_favorite_words);
 
-//        RecyclerView recyclerView = binding.defragRecyclerView;
-//
         wordRecycler = findViewById(R.id.wordRecycler);
         wordRecycler.setLayoutManager(new LinearLayoutManager(this));
-//        wordRecycler.setAdapter(wordAdapter);
-
-//        RecyclerView recyclerView = findViewById(R.id.wordRecycler);
 
         // Fetch saved words from the database
         DictionaryDatabase db = Room.databaseBuilder(getApplicationContext(), DictionaryDatabase.class, "dictionaryDatabase").build();
@@ -59,23 +56,13 @@ public class FavoriteWords extends AppCompatActivity {
                         wordAdapter = new WordAdapter(wordList);
                         wordRecycler.setAdapter(wordAdapter);
 
-//                    if (wordAdapter == null) {
-//                        wordAdapter = new WordAdapter(wordList);
-////                        wordRecycler.setAdapter(wordAdapter);
-//                    } else {
-//                        wordAdapter.notifyDataSetChanged();
-//                    }
                 });
             });
-//        } // end if
 
 
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });    }
+
+        }
 
     private class WordAdapter extends RecyclerView.Adapter<WordViewHolder> {
         private final List<DictionaryItem> wordTermList;
@@ -100,7 +87,7 @@ public class FavoriteWords extends AppCompatActivity {
         public WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 //            FragmentWordBinding wordBinding = FragmentWordBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
 //            return new WordViewHolder(wordBinding.getRoot());
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_favorite_words, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.display_favorite_words, parent, false);
             return new WordViewHolder(view);
         }
 
@@ -118,18 +105,46 @@ public class FavoriteWords extends AppCompatActivity {
 
             toolbar.inflateMenu(R.menu.fave_word);
             toolbar.setOnMenuItemClickListener(item -> {
-                if (item.getItemId() == R.id.infoButton) {
-//                    try {
-//                        DefinitionFragment wordDetailFragment = new DefinitionFragment(wordEntity);
-//                        FragmentManager fragmentManager = getSupportFragmentManager();
-//                        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//                        transaction.addToBackStack("please");
-//                        transaction.replace(R.id.frag, wordDetailFragment);
-//                        transaction.commit();
-//
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
+                if (item.getItemId() == R.id.delete_word) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                    builder.setMessage("Do you want to delete this Definition from your Favourites?")
+                            .setTitle("Delete")
+                            .setNegativeButton("No", (dialog, which) -> {
+                                // User chose not to delete
+                            })
+                            .setPositiveButton("Yes", (dialog, which) -> {
+                                // User chose to delete
+
+
+                                Executor thread1 = Executors.newSingleThreadExecutor();
+                                thread1.execute(() -> {
+                                    try {
+                                        // Ensure that the deleteWordDefinition method is correctly implemented
+                                        dDAO.deleteWord(word.getWord());
+                                        Log.d("Deleted", "Rows affected: " + word.getWord());
+                                    } catch (Exception e) {
+                                        Log.e("DeleteError", "Error Deleting definition", e);
+                                    }
+                                });
+
+                                // Log to check if the definition is being deleted
+                                Log.d("definition", "definition deleted: " + word);
+
+                                Snackbar.make(requireView(), "Definition deleted", Snackbar.LENGTH_LONG)
+                                        .setAction("Undo", (btn) -> {
+                                            // User clicked Undo
+                                            Executor thread2 = Executors.newSingleThreadExecutor();
+                                            thread2.execute(() -> {
+                                                // undo the deletion in the database
+                                                dDAO.insertItemDefinition(word);
+                                            });
+                                            adapter.notifyDataSetChanged();
+                                        })
+                                        .show();
+                            });
+                    builder.create().show();
+                    Log.e("WordAdapter", "WordEntity is null");
+
                     return true;
                 } else {
                     Log.e("WordAdapter", "WordEntity is null");
