@@ -99,24 +99,26 @@ public class FavoriteWords extends AppCompatActivity {
                             // Do nothing on cancel
                         })
                         .setPositiveButton("Yes", (dialog, which) -> {
-                            Executor deleteThread = Executors.newSingleThreadExecutor();
-                            deleteThread.execute(() -> {
+                            // Execute delete operation asynchronously using Room database
+                            Executor thread = Executors.newSingleThreadExecutor();
+                            thread.execute(() -> {
+                                // Perform delete operation
                                 db.dictionaryItemDAO().deleteItemDefinition(wordEntity);
+
+                                // Update UI on the main thread
                                 runOnUiThread(() -> {
+                                    // Remove the item from the list and notify the adapter
                                     wordTermList.remove(position);
                                     notifyItemRemoved(position);
 
-                                    Snackbar.make(holder.itemView, "Word deleted from favorites", Snackbar.LENGTH_LONG)
-                                            .setAction("Undo", v1 -> {
-                                                db.dictionaryItemDAO().insertItemDefinition(wordEntity);
-                                                wordTermList.add(position, wordEntity);
-                                                notifyItemInserted(position);
-                                            }).show();
+                                    // Show a snackbar indicating the word is deleted
+                                    Snackbar.make(holder.itemView, "Word deleted from favorites", Snackbar.LENGTH_LONG).show();
                                 });
                             });
                         }).create().show();
                 return true;
             });
+
         }
 
         @Override

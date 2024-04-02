@@ -207,7 +207,7 @@ public class Dictionary extends AppCompatActivity {
 
             db = Room.databaseBuilder(Dictionary.this, DictionaryDatabase.class, "dictionaryDatabase").build();
             DictionaryItemDAO dDAO = db.dictionaryItemDAO();
-            androidx.appcompat.widget.Toolbar toolbar = holder.definitionsMenu;
+//            androidx.appcompat.widget.Toolbar toolbar = holder.definitionsMenu;
             toolbar.inflateMenu(R.menu.definitions_menu);
 
             toolbar.setOnMenuItemClickListener(item -> {
