@@ -137,7 +137,7 @@ public class Dictionary extends AppCompatActivity {
             }
 
             // Update RecyclerView
-//            adapter.notifyDataSetChanged(); // Notify adapter of the data change
+            adapter.notifyDataSetChanged(); // Notify adapter of the data change
 
         } catch (JSONException e) {
             e.printStackTrace();
