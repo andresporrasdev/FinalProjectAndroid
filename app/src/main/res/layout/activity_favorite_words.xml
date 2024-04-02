@@ -8,14 +8,6 @@
     tools:context=".dictionary.FavoriteWords">
 
 
-  <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/wordRecycler"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:scrollbars="vertical"
-      app:layout_constraintTop_toBottomOf="@+id/recyclerWordView"
-      tools:layout_editor_absoluteX="8dp" />
-
   <androidx.appcompat.widget.Toolbar
       android:id="@+id/details"
       android:layout_width="match_parent"
@@ -23,34 +15,37 @@
       android:background="?attr/colorPrimary"
       android:minHeight="?attr/actionBarSize"
       android:theme="?attr/actionBarTheme"
-      app:layout_constraintTop_toTopOf="@+id/wordRecycler"
-      tools:layout_editor_absoluteX="151dp" />
+      app:layout_constraintTop_toTopOf="parent"
+      tools:layout_editor_absoluteX="16dp" />
 
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/wordRecycler"
+      android:layout_width="213dp"
+      android:layout_height="357dp"
+      android:scrollbars="vertical"
+      app:layout_constraintEnd_toEndOf="@+id/faveTitle"
+      app:layout_constraintStart_toStartOf="@+id/details"
+      app:layout_constraintTop_toBottomOf="@+id/details" />
 
   <TextView
       android:id="@+id/faveTitle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginStart="30dp"
-      android:layout_marginEnd="30dp"
       android:fontFamily="serif"
       android:text="faveTitle"
       android:textAlignment="center"
       android:textSize="35sp"
       android:textStyle="bold"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toTopOf="parent"
+      tools:layout_editor_absoluteX="30dp" />
 
   <TextView
       android:id="@+id/recyclerWordView"
       android:layout_width="187dp"
       android:layout_height="116dp"
-      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="@+id/wordRecycler"
       app:layout_constraintStart_toStartOf="@+id/wordRecycler"
-      app:layout_constraintTop_toBottomOf="@+id/faveTitle" />
+      app:layout_constraintTop_toBottomOf="@+id/details" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
