@@ -6,6 +6,10 @@ android {
     namespace = "algonquin.cst2335.finalprojectandroid"
     compileSdk = 34
 
+    viewBinding{
+        viewBinding.enable
+    }
+
     defaultConfig {
         applicationId = "algonquin.cst2335.finalprojectandroid"
         minSdk = 27
