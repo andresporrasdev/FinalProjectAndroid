@@ -105,7 +105,7 @@ dependencies {
     annotationProcessor ("androidx.room:room-compiler:2.4.3")
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(libs.espresso.contrib)
+//    androidTestImplementation(libs.espresso.contrib)
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.github.bumptech.glide:glide:4.12.0")
