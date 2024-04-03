@@ -258,6 +258,7 @@ public class Dictionary extends AppCompatActivity {
 
         // Display help information in a dialog
         String helpText = "Help Information\n" +
+
                 "\n" +
                 "To use the Dictionary app, follow these steps:\n" +
                 "\n" +
