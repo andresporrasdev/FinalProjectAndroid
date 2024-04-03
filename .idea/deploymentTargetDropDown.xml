@@ -5,6 +5,24 @@
       <entry key="RecipeDetailActivityTest">
         <State />
       </entry>
+      <entry key="DictionaryEspressoTest">
+        <State />
+      </entry>
+      <entry key="MainActivity">
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\camil\.android\avd\Pixel_5_API_27.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-04-03T15:25:57.676473800Z" />
+        </State>
       <entry key="RecipeSearchActivityTest">
         <State />
       </entry>
@@ -45,6 +63,10 @@
           <timeTargetWasSelectedWithDropDown value="2024-03-29T01:47:39.855016Z" />
         </State>
       </entry>
+      <entry key="testDefinitionTextViewVisibility()">
+        <State />
+      </entry>
+      <entry key="testDictionaryToolbarVisibility()">
       <entry key="lookupTest()">
         <State />
       </entry>

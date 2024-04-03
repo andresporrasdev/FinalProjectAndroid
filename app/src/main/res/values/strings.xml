@@ -26,6 +26,12 @@
     <string name="undo_successfull_text">Undo successful</string>
     <string name="Deezer_Song">Deezer Song</string>
     <string name="app_name">FinalProjectAndroid</string>
+    <string name="save">ave</string>
+    <string name="help">Help</string>
+    <string name="Bookmarks">BookMarks</string>
+    <string name="dictionary">Dictionary</string>
+    <string name="item">Item</string>
+    <string name="delete">Delete</string>
     <string name="toolbar_title">Recipe Explore</string>
     <string name="search">Search</string>
     <string name="info">User Guide</string>

@@ -78,6 +78,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.room.common)
+    implementation(libs.room.runtime)
 // Test libs
     testImplementation ("junit:junit:4.13.2")
     testImplementation(libs.junit)
@@ -90,7 +92,7 @@ dependencies {
     androidTestImplementation ("org.hamcrest:hamcrest:2.2")
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
-
+    annotationProcessor(libs.room.compiler)
     implementation("androidx.test:runner:1.5.2")
     implementation("androidx.test:rules:1.6.0-alpha03")
     implementation("androidx.test.ext:junit:1.2.0-alpha03")
@@ -108,7 +110,4 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
-
-
-
 }
