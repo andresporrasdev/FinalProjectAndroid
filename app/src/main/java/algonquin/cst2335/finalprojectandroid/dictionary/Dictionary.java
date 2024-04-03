@@ -217,9 +217,6 @@ public class Dictionary extends AppCompatActivity {
                             });
                     builder.create().show();
                 }
-                if (item.getItemId() == R.id.help){
-                    showHelpInformation();
-                }
                 return false;
             });
         }
@@ -261,17 +258,5 @@ public class Dictionary extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.help) {
-            // Show help information in a dialog
-            showHelpInformation();
-            return true;
-        }
-        return false;
     }
 }
