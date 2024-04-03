@@ -9,9 +9,8 @@
         android:id="@+id/details"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/light_navy"
+        android:background="@color/dark_navy"
         android:theme="?attr/actionBarTheme"
-        android:title="Word Details"
         android:titleTextColor="@android:color/white"
         app:subtitleTextColor="@color/light_green" />
 

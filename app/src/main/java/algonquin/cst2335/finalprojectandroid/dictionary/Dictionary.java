@@ -1,18 +1,6 @@
 package algonquin.cst2335.finalprojectandroid.dictionary;
 
-import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import algonquin.cst2335.finalprojectandroid.MainActivity;
-import algonquin.cst2335.finalprojectandroid.R;
-import algonquin.cst2335.finalprojectandroid.RecipeSearchActivity;
-
-import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,6 +37,7 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import algonquin.cst2335.finalprojectandroid.R;
 
 public class Dictionary extends AppCompatActivity {
 
@@ -57,20 +46,20 @@ public class Dictionary extends AppCompatActivity {
     private EditText searchEditText;
     private Button searchButton;
     private Button viewSavedButton;
-    DictionaryViewModel viewModel;
     private ArrayList<DictionaryItem> wordDefinitionsList = new ArrayList<>();
     private ArrayList<DictionaryItem> favsList = new ArrayList<>();
     androidx.appcompat.widget.Toolbar toolbar;
     RequestQueue queue;
 
-    private WordDefinitionAdapter adapter;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_dictionary);
+        toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
         queue = Volley.newRequestQueue(this);
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -81,18 +70,15 @@ public class Dictionary extends AppCompatActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new WordDefinitionAdapter(wordDefinitionsList);
+        WordDefinitionAdapter adapter = new WordDefinitionAdapter(wordDefinitionsList);
         recyclerView.setAdapter(adapter);
+
+        // Initialize the database
+        db = Room.databaseBuilder(getApplicationContext(), DictionaryDatabase.class, "dictionaryDatabase").build();
 
         viewSavedButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, FavoriteWords.class);
             startActivity(intent);
-        });
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
         });
 
         searchButton.setOnClickListener(v -> {
@@ -109,10 +95,7 @@ public class Dictionary extends AppCompatActivity {
                 Toast.makeText(this, "Enter a search term", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-    } // end main method
-
+    }
     private void handleResponse(JSONArray response, String searchTerm) {
         try {
             wordDefinitionsList.clear(); // Clear the existing list
@@ -137,7 +120,9 @@ public class Dictionary extends AppCompatActivity {
             }
 
             // Update RecyclerView
-            adapter.notifyDataSetChanged(); // Notify adapter of the data change
+
+            WordDefinitionAdapter adapter = new WordDefinitionAdapter(wordDefinitionsList);
+            recyclerView.setAdapter(adapter);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -148,46 +133,25 @@ public class Dictionary extends AppCompatActivity {
     public class WordDefinitionAdapter extends RecyclerView.Adapter<WordDefinitionAdapter.ViewHolder> {
         private List<DictionaryItem> wordDefinitionsList;
 
-        /**
-         * ViewHolder class for displaying word definitions and managing favorites in RecyclerView items.
-         */
+        public WordDefinitionAdapter(List<DictionaryItem> wordDefinitionsList) {
+            this.wordDefinitionsList = wordDefinitionsList;
+        }
+
         public class ViewHolder extends RecyclerView.ViewHolder {
             TextView definitionTextView;
-            androidx.appcompat.widget.Toolbar definitionsMenu;
+            androidx.appcompat.widget.Toolbar toolbar;
 
-            /**
-             * Constructs a new ViewHolder for displaying word definitions and managing favorites in a RecyclerView item.
-             * @param itemView The view representing a single item in the RecyclerView.
-             */
             public ViewHolder(View itemView) {
                 super(itemView);
                 definitionTextView = itemView.findViewById(R.id.definitionTextView);
-                definitionsMenu = itemView.findViewById(R.id.definitionsToolbar);
+                toolbar = itemView.findViewById(R.id.definitionsToolbar);
             }
 
-            /**
-             * Binds a definition to the ViewHolder item.
-             * @param definition The definition text to be displayed
-             */
             public void bind(String definition) {
                 definitionTextView.setText(definition);
             }
         }
 
-        /**
-         * Constructs a new WordDefinitionAdapter to manage the display of word definitions in a RecyclerView.
-         * @param wordDefinitionsList The list of DictionaryItem objects containing word definitions to be displayed.
-         */
-        public WordDefinitionAdapter(List<DictionaryItem> wordDefinitionsList) {
-            this.wordDefinitionsList = wordDefinitionsList;
-        }
-
-        /**
-         * Called by RecyclerView when it needs a new ViewHolder of the given type to represent an item.
-         * @param parent   The ViewGroup into which the new View will be added after it is bound to an adapter position
-         * @param viewType The type of the new View
-         * @return A new ViewHolder that holds a View of the given view type
-         */
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -195,20 +159,20 @@ public class Dictionary extends AppCompatActivity {
             return new ViewHolder(view);
         }
 
-        /**
-         * Called by RecyclerView to display the data at the specified position.
-         * @param holder   The ViewHolder which should be updated to represent the contents of the item at the given position
-         * @param position The position of the item within the adapter's data set
-         */
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+            RecyclerView recyclerView = findViewById(R.id.recyclerView);
+            WordDefinitionAdapter adapter = new WordDefinitionAdapter(wordDefinitionsList);
+            recyclerView.setAdapter(adapter);
+
             String definition = wordDefinitionsList.get(position).getDefinitions();
             holder.bind(definition);
 
             db = Room.databaseBuilder(Dictionary.this, DictionaryDatabase.class, "dictionaryDatabase").build();
             DictionaryItemDAO dDAO = db.dictionaryItemDAO();
 //            androidx.appcompat.widget.Toolbar toolbar = holder.definitionsMenu;
-            toolbar.inflateMenu(R.menu.definitions_menu);
+//            toolbar.inflateMenu(R.menu.definitions_menu);
 
             toolbar.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == R.id.save) {
@@ -256,12 +220,6 @@ public class Dictionary extends AppCompatActivity {
                 return false;
             });
         }
-
-        /**
-         * Returns the total number of items in the data set held by the adapter.
-         *
-         * @return The total number of items in this adapter's data set
-         */
         @Override
         public int getItemCount() {
             return wordDefinitionsList.size();
@@ -274,6 +232,13 @@ public class Dictionary extends AppCompatActivity {
         editor.putString("last_searched_word", searchTerm);
         editor.apply();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.definitions_menu, menu);
+        return true;
+    }
+
     private void showHelpInformation() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Help Information");
@@ -294,5 +259,4 @@ public class Dictionary extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-} // end class
+}

@@ -3,7 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/save"
-        android:iconTint="@color/light_green"
+        android:icon="@android:drawable/ic_menu_save"
+        android:iconTintMode="add"
         android:title="save"
-        app:showAsAction="always" />
+        android:titleTextColor="@android:color/white"
+        app:showAsAction="always"
+        app:titleTextColor="@color/white" />
+
+    <item
+        android:id="@+id/help"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:iconTint="@color/white"
+        android:title="Help"
+        android:titleTextColor="@android:color/white"
+        app:showAsAction="always"
+        app:titleTextColor="@color/white" />
 </menu>
