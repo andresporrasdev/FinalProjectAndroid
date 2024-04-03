@@ -2,7 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="Dictionary">
+      <entry key="RecipeDetailActivityTest">
         <State />
       </entry>
       <entry key="DictionaryEspressoTest">
@@ -23,6 +23,29 @@
           </targetSelectedWithDropDown>
           <timeTargetWasSelectedWithDropDown value="2024-04-03T15:25:57.676473800Z" />
         </State>
+      <entry key="RecipeSearchActivityTest">
+        <State />
+      </entry>
+      <entry key="RecipeSearchActivityTest2">
+        <State />
+      </entry>
+      <entry key="ActivityLaunchTest">
+        <State />
+      </entry>
+      <entry key="AlertDialogTest">
+        <State />
+      </entry>
+      <entry key="FavoriteListTest">
+        <State />
+      </entry>
+      <entry key="SSLookupTest">
+        <State />
+      </entry>
+      <entry key="SharedPreferenceTest">
+        <State />
+      </entry>
+      <entry key="app">
+        <State />
       </entry>
       <entry key="app">
         <State>
@@ -32,18 +55,28 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\p2277\.android\avd\Pixel_5_API_27.avd" />
+                  <value value="$USER_HOME$/.android/avd/Pixel_7_API_27.avd" />
                 </Key>
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-03-21T18:42:25.020270700Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-03-29T01:47:39.855016Z" />
         </State>
       </entry>
       <entry key="testDefinitionTextViewVisibility()">
         <State />
       </entry>
       <entry key="testDictionaryToolbarVisibility()">
+      <entry key="lookupTest()">
+        <State />
+      </entry>
+      <entry key="lookupWithNegativeLatTest()">
+        <State />
+      </entry>
+      <entry key="lookupWithNegativeLatTest() (1)">
+        <State />
+      </entry>
+      <entry key="saveLocationTest()">
         <State />
       </entry>
     </value>

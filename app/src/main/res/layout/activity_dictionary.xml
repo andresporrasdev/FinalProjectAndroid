@@ -12,11 +12,12 @@
         android:id="@+id/searchEditText"
         android:layout_width="250dp"
         android:layout_height="51dp"
-        android:fontFamily="serif"
         android:hint="@string/search"
         android:iconifiedByDefault="false"
         android:textColor="@color/dark_navy"
         android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:fontFamily="serif"
         app:layout_constraintEnd_toStartOf="@+id/searchButton"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toBottomOf="@+id/savedDefinitions" />
@@ -33,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchEditText"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.167" />
 
     <Button
         android:id="@+id/searchButton"

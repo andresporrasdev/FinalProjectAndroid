@@ -4,6 +4,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -18,12 +20,40 @@
             android:name=".dictionary.FavoriteWords"
             android:exported="false" />
         <activity
+            android:name=".FavoriteSongDetail"
+            android:exported="false" />
+        <activity
+            android:name=".SongFav"
+            android:exported="false" />
+        <activity
+            android:name=".DeezerSongActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".DeezerSongDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".sslookup.LocationDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SSLookupActivity"
+            android:exported="false"/>
+        <activity
             android:name=".dictionary.Dictionary"
             android:exported="false" />
         <activity
             android:name=".RecipeSearchActivity"
             android:exported="false" />
         <activity
+            android:name=".RecipeDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SavedRecipesDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SavedRecipesActivity"
+            android:exported="false" />
+      <activity
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>
