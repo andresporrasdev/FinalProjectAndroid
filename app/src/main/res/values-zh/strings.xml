@@ -6,4 +6,6 @@
     <string name="Bookmarks">书签</string>
     <string name="dictionary">字典</string>
     <string name="search">搜索</string>
+    <string name="item">物品</string>
+    <string name="delete">删除</string>
 </resources>

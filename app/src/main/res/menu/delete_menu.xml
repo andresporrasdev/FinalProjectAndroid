@@ -4,6 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/deleteF"
-        android:title="Item"
+        android:title="@string/item"
         app:showAsAction="always" />
 </menu>

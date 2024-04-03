@@ -5,4 +5,6 @@
     <string name="Bookmarks">BookMarks</string>
     <string name="dictionary">Dictionary</string>
     <string name="search">search</string>
+    <string name="item">Item</string>
+    <string name="delete">Delete</string>
 </resources>
