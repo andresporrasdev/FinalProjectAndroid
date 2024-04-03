@@ -2,15 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="Dictionary">
-        <State />
-      </entry>
-      <entry key="MainActivity">
-        <State />
-      </entry>
-      <entry key="RecipeSearchActivity">
-        <State />
-      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>
@@ -26,6 +17,15 @@
           </targetSelectedWithDropDown>
           <timeTargetWasSelectedWithDropDown value="2024-03-21T18:42:25.020270700Z" />
         </State>
+      </entry>
+      <entry key="testDefinitionTextViewVisibility()">
+        <State />
+      </entry>
+      <entry key="testDictionarySearch()">
+        <State />
+      </entry>
+      <entry key="testDictionaryToolbarVisibility()">
+        <State />
       </entry>
     </value>
   </component>

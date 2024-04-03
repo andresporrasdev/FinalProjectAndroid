@@ -13,7 +13,7 @@
         android:layout_width="250dp"
         android:layout_height="51dp"
         android:fontFamily="serif"
-        android:hint="Search"
+        android:hint="@string/search"
         android:iconifiedByDefault="false"
         android:textColor="@color/dark_navy"
         android:textStyle="bold"
@@ -40,7 +40,7 @@
         android:layout_width="93dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="search"
+        android:text="@string/search"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="@+id/searchEditText" />
 
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Saved definitions"
+        android:text="@string/Bookmarks"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="serif"
-        android:text="Dictionary"
+        android:text="@string/dictionary"
         android:textColor="@color/light_green"
         android:textSize="40sp"
         android:textStyle="bold"

@@ -5,16 +5,16 @@
         android:id="@+id/save"
         android:icon="@android:drawable/ic_menu_save"
         android:iconTintMode="add"
-        android:title="save"
+        android:title="@string/save"
         android:titleTextColor="@android:color/white"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         app:titleTextColor="@color/white" />
 
     <item
         android:id="@+id/help"
         android:icon="@android:drawable/ic_dialog_info"
         android:iconTint="@color/white"
-        android:title="Help"
+        android:title="@string/help"
         android:titleTextColor="@android:color/white"
         app:showAsAction="always"
         app:titleTextColor="@color/white" />

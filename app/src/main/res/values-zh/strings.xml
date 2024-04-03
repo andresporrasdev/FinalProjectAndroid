@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android 最终项目</string>
+    <string name="save">节省</string>
+    <string name="help">帮助</string>
+    <string name="Bookmarks">书签</string>
+    <string name="dictionary">字典</string>
+    <string name="search">搜索</string>
+</resources>

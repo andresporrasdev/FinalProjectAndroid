@@ -41,13 +41,13 @@ import algonquin.cst2335.finalprojectandroid.R;
 
 public class Dictionary extends AppCompatActivity {
 
-    private DictionaryDatabase db;
-    private RecyclerView recyclerView;
-    private EditText searchEditText;
-    private Button searchButton;
-    private Button viewSavedButton;
-    private ArrayList<DictionaryItem> wordDefinitionsList = new ArrayList<>();
-    private ArrayList<DictionaryItem> favsList = new ArrayList<>();
+    DictionaryDatabase db;
+    RecyclerView recyclerView;
+    public EditText searchEditText;
+    public Button searchButton;
+    Button viewSavedButton;
+    public ArrayList<DictionaryItem> wordDefinitionsList = new ArrayList<>();
+    ArrayList<DictionaryItem> favsList = new ArrayList<>();
     androidx.appcompat.widget.Toolbar toolbar;
     RequestQueue queue;
 
@@ -96,7 +96,7 @@ public class Dictionary extends AppCompatActivity {
             }
         });
     }
-    private void handleResponse(JSONArray response, String searchTerm) {
+    public void handleResponse(JSONArray response, String searchTerm) {
         try {
             wordDefinitionsList.clear(); // Clear the existing list
 
@@ -220,13 +220,14 @@ public class Dictionary extends AppCompatActivity {
                 return false;
             });
         }
+
         @Override
         public int getItemCount() {
             return wordDefinitionsList.size();
         }
     }
 
-    private void saveSearchedWord(String searchTerm) {
+    public void saveSearchedWord(String searchTerm) {
         SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("last_searched_word", searchTerm);
