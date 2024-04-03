@@ -239,19 +239,42 @@ public class Dictionary extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.help) {
+            // Show help information in a dialog
+            showHelpInformation();
+            return true;
+        }
+        return false;
+    }
+
     private void showHelpInformation() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Help Information");
 
         // Display help information in a dialog
-        String helpText = "Enter a word into the search bar. Then press search. A list of definitions " +
-                "will appear below the search bar. To save a definition, press the icon to the right of the definition. A message " +
-                "will show up at the bottom of your screen if you want to undo, click undo if you would like to undo the save." +
-                " If you want to view your saved words, click the button at the bottom of the page that says View Saved Terms." +
-                " It will bring you to a new page that shows all of the words you saved. You can then scroll through your words and " +
-                "click the 'i' icon to the right of the word to view the definitions of all of the words. When in the view page, you" +
-                " can click on the delete icon on the right of the definition if you want to delete the definition. To go back press " +
-                "the back button that is apart of your device. ";
+        String helpText = "Help Information\n" +
+                "\n" +
+                "To use the Dictionary app, follow these steps:\n" +
+                "\n" +
+                "Search for a Word: Enter a word into the search bar at the top of the screen.\n" +
+                "\n" +
+                "View Definitions: Press the \"Search\" button. A list of definitions related to the entered word will appear below the search bar.\n" +
+                "\n" +
+                "Save a Definition: To save a definition to your favorites, press the icon located to the right of the definition.\n" +
+                "\n" +
+                "Undo a Save: If you want to undo the save, a message will appear at the bottom of your screen. Click \"Undo\" to remove the saved definition.\n" +
+                "\n" +
+                "View Saved Words: Press the \"View Saved Terms\" button at the bottom of the screen. This will take you to a new page displaying all the words you've saved.\n" +
+                "\n" +
+                "View Definitions of Saved Words: On the view page, click the 'i' icon to the right of a word to view its definitions.\n" +
+                "\n" +
+                "Delete a Saved Definition: While viewing the definitions of a saved word, you can click on the delete icon located on the right side of the definition to delete it.\n" +
+                "\n" +
+                "Navigation: To go back to the previous screen, use the back button on your device.";
         builder.setMessage(helpText);
 
         builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
