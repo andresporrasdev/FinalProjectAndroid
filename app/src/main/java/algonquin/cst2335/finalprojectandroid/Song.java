@@ -40,8 +40,7 @@ public class Song {
     @ColumnInfo(name="title")
     private String title;
     /**
-     * The duration of the song, typically in a format like "3:45" for three minutes and forty-five seconds. This field
-     * is stored in the database column named "duration". It represents the length of the song and is user-readable.
+     * The duration of the song. It represents the length of the song and is user-readable.
      */
     @ColumnInfo(name="duration")
     private String duration;
