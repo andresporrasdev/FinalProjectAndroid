@@ -1,5 +1,5 @@
 # Final Project Android
-![Final Project Android Main App](https://raw.githubusercontent.com/andresporrasdev/FinalProjectAndroid/master/Readme/Images/MainApp.png)
+
 ## Overview
 This project demonstrates key Android functionalities, including activity lifecycle management, UI design, data handling, and integration with external services.
 Main app is compose of four small apps inside:
@@ -21,6 +21,10 @@ Main app is compose of four small apps inside:
 * SQLite
 * REST APIs
 
+### Screenshots
+
+![Final Project Android Main App](https://raw.githubusercontent.com/andresporrasdev/FinalProjectAndroid/master/Readme/Images/MainApp.png)
+
 ## Dictionary App
   
 This is a simple Android dictionary application that allows users to search for word definitions and save their favorite ones.
@@ -34,7 +38,8 @@ This is a simple Android dictionary application that allows users to search for 
 * Delete saved definitions.
 * Help information dialog.
 
-### Screenshots:
+### Screenshots
+![Final Project Android Dictionary App](https://raw.githubusercontent.com/andresporrasdev/FinalProjectAndroid/master/Readme/Images/Dictionary.png)
 
 ## Deezer Song Search App
 
@@ -52,6 +57,8 @@ This Android application allows you to search for artists on Deezer and view the
 
 ### Screenshots
 
+![Final Project Android Dictionary App](https://raw.githubusercontent.com/andresporrasdev/FinalProjectAndroid/master/Readme/Images/DeezerSearcher.png)
+
 ## Recipe Search App
 
 This Android application allows you to search for recipes using the Spoonacular API. You can view a list of recipes based on your search query, view detailed information about each recipe, and save your favorite recipes for later access.
@@ -66,6 +73,9 @@ This Android application allows you to search for recipes using the Spoonacular 
 * Help information dialog.
 * Remembers the last search query.
 
+### Screenshots
+
+![Final Project Android Dictionary App](https://raw.githubusercontent.com/andresporrasdev/FinalProjectAndroid/master/Readme/Images/RecipeSearchApp.png)
 
 ## Sunrise & Sunset Lookup App
 
@@ -82,3 +92,5 @@ This Android application allows you to find the sunrise and sunset times for any
 * Remembers the last entered latitude and longitude.
 
 ### Screenshots
+
+![Final Project Android Dictionary App](https://raw.githubusercontent.com/andresporrasdev/FinalProjectAndroid/master/Readme/Images/SunriseSunset.png)
