@@ -94,3 +94,8 @@ This Android application allows you to find the sunrise and sunset times for any
 ### Screenshots
 
 ![Final Project Android Dictionary App](https://raw.githubusercontent.com/andresporrasdev/FinalProjectAndroid/master/Readme/Images/SunriseSunset.png)
+
+## Setup
+* Clone the repository.
+* Open in Android Studio.
+* Build the project and run on an emulator or device with Android Oreo minimum
