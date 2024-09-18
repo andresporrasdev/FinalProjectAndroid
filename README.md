@@ -1,4 +1,5 @@
 # Final Project Android
+![Final Project Android Main App](https://raw.githubusercontent.com/andresporrasdev/FinalProjectAndroid/master/Readme/Images/MainApp.png)
 ## Overview
 This project demonstrates key Android functionalities, including activity lifecycle management, UI design, data handling, and integration with external services.
 Main app is compose of four small apps inside:
